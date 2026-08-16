@@ -1,0 +1,14 @@
+// swift-tools-version:5.9
+import PackageDescription
+
+let package = Package(
+    name: "NoteScribe",
+    platforms: [.iOS(.v16), .macOS(.v13)],
+    products: [
+        .library(name: "PitchKit", targets: ["PitchKit"])
+    ],
+    targets: [
+        .target(name: "PitchKit"),
+        .testTarget(name: "PitchKitTests", dependencies: ["PitchKit"])
+    ]
+)
