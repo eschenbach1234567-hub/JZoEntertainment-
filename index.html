@@ -181,5 +181,19 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+
+<!-- Faengt Einladungs-/Passwort-Links vom Admin-Bereich ab und zeigt das Passwort-Fenster direkt hier -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function (user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function () {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
