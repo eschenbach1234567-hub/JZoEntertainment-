@@ -12,7 +12,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
   renderEvents();
   renderBlog();
+  renderContact();
 });
+
+function renderContact() {
+  if (typeof CONTACT === "undefined") return;
+
+  var actions = {
+    "phone-href": function (el) {
+      el.setAttribute("href", "tel:" + CONTACT.phoneHref);
+      el.textContent = CONTACT.phoneDisplay;
+    },
+    "email-href": function (el) {
+      el.setAttribute("href", "mailto:" + CONTACT.email);
+      el.textContent = CONTACT.email;
+    },
+    "email-href-subject": function (el) {
+      el.setAttribute("href", "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Anfrage über die Website"));
+    },
+    "name-text": function (el) { el.textContent = CONTACT.name; },
+    "address-text": function (el) { el.textContent = CONTACT.addressLine; },
+    "ig-href": function (el) { el.setAttribute("href", CONTACT.instagramUrl); },
+    "yt-href": function (el) { el.setAttribute("href", CONTACT.youtubeUrl); },
+    "ig-handle": function (el) { el.textContent = CONTACT.instagramHandle; },
+  };
+
+  document.querySelectorAll("[data-c]").forEach(function (el) {
+    var action = actions[el.getAttribute("data-c")];
+    if (action) action(el);
+  });
+}
 
 function formatDate(iso) {
   if (!iso) return "";
