@@ -55,13 +55,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 .brand-logo {
-  height: 42px;
+  height: 58px;
   width: auto;
   display: block;
 }
 
 .brand-logo.large {
-  height: clamp(70px, 14vw, 128px);
+  height: clamp(110px, 20vw, 190px);
 }
 
 /* ---------- Header / Nav ---------- */
