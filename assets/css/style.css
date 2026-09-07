@@ -6,7 +6,7 @@
    ========================================================================== */
 
 :root {
-  --bg: #0a0a0a;
+  --bg: #000000;
   --bg-soft: #131313;
   --bg-card: #1a1a1a;
   --border: #2a2a2a;
@@ -70,7 +70,7 @@ header.site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10, 10, 10, 0.85);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
 }
