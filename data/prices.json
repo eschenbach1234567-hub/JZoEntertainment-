@@ -1,0 +1,18 @@
+{
+  "hourly": {
+    "amount": "75 € / Stunde",
+    "note": "zzgl. Anfahrtskosten von 0,40 € pro Kilometer"
+  },
+  "vhs": {
+    "amount": "10–15 €",
+    "note": "pro Kassette, je nach Länge/Zustand"
+  },
+  "digital8": {
+    "amount": "10–15 €",
+    "note": "pro Kassette, je nach Länge/Zustand"
+  },
+  "other": {
+    "amount": "auf Anfrage",
+    "note": "Umfang sehr unterschiedlich – individuelles Angebot"
+  }
+}

@@ -1,5 +1,6 @@
 // JZO Entertainment - main.js
-// Mobil-Navigation + Rendering fuer Events und Blog (Daten kommen aus /data/*.js)
+// Mobil-Navigation + Rendering von Events/Blog/Kontakt/Preisen aus /data/*.json
+// Die JSON-Dateien sind ueber den Admin-Bereich (/admin) mit dem CMS editierbar.
 
 document.addEventListener("DOMContentLoaded", function () {
   var toggle = document.querySelector(".nav-toggle");
@@ -10,36 +11,65 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  renderEvents();
-  renderBlog();
-  renderContact();
+  loadJson("data/contact.json").then(renderContact);
+  loadJson("data/events.json").then(function (data) { renderEvents(data && data.events); });
+  loadJson("data/blog.json").then(function (data) { renderBlog(data && data.posts); });
+  loadJson("data/prices.json").then(renderPrices);
 });
 
-function renderContact() {
-  if (typeof CONTACT === "undefined") return;
+function loadJson(path) {
+  return fetch(path)
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .catch(function () { return null; });
+}
+
+function renderContact(contact) {
+  if (!contact) return;
 
   var actions = {
     "phone-href": function (el) {
-      el.setAttribute("href", "tel:" + CONTACT.phoneHref);
-      el.textContent = CONTACT.phoneDisplay;
+      el.setAttribute("href", "tel:" + contact.phoneHref);
+      el.textContent = contact.phoneDisplay;
     },
     "email-href": function (el) {
-      el.setAttribute("href", "mailto:" + CONTACT.email);
-      el.textContent = CONTACT.email;
+      el.setAttribute("href", "mailto:" + contact.email);
+      el.textContent = contact.email;
     },
     "email-href-subject": function (el) {
-      el.setAttribute("href", "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Anfrage über die Website"));
+      el.setAttribute("href", "mailto:" + contact.email + "?subject=" + encodeURIComponent("Anfrage über die Website"));
     },
-    "name-text": function (el) { el.textContent = CONTACT.name; },
-    "address-text": function (el) { el.textContent = CONTACT.addressLine; },
-    "ig-href": function (el) { el.setAttribute("href", CONTACT.instagramUrl); },
-    "yt-href": function (el) { el.setAttribute("href", CONTACT.youtubeUrl); },
-    "ig-handle": function (el) { el.textContent = CONTACT.instagramHandle; },
+    "name-text": function (el) { el.textContent = contact.name; },
+    "address-text": function (el) { el.textContent = contact.addressLine; },
+    "ig-href": function (el) { el.setAttribute("href", contact.instagramUrl); },
+    "yt-href": function (el) { el.setAttribute("href", contact.youtubeUrl); },
+    "ig-handle": function (el) { el.textContent = contact.instagramHandle; },
   };
 
   document.querySelectorAll("[data-c]").forEach(function (el) {
     var action = actions[el.getAttribute("data-c")];
     if (action) action(el);
+  });
+}
+
+function renderPrices(prices) {
+  if (!prices) return;
+
+  var map = {
+    "price-hourly-badge": prices.hourly.amount + " + Anfahrt",
+    "price-hourly-amount": prices.hourly.amount,
+    "price-hourly-note": prices.hourly.note,
+    "price-digitalisierung-badge": prices.vhs.amount + " pro Kassette",
+    "price-vhs-amount": prices.vhs.amount,
+    "price-vhs-note": prices.vhs.note,
+    "price-digital8-amount": prices.digital8.amount,
+    "price-digital8-note": prices.digital8.note,
+    "price-other-amount": prices.other.amount,
+    "price-other-note": prices.other.note,
+  };
+
+  Object.keys(map).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = map[id];
   });
 }
 
@@ -50,11 +80,11 @@ function formatDate(iso) {
   return d.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
 }
 
-function renderEvents() {
+function renderEvents(items) {
   var container = document.getElementById("events-list");
   if (!container) return;
 
-  var items = (typeof EVENTS !== "undefined") ? EVENTS.slice() : [];
+  items = (items || []).slice();
 
   if (!items.length) {
     container.innerHTML =
@@ -78,11 +108,11 @@ function renderEvents() {
   }).join("");
 }
 
-function renderBlog() {
+function renderBlog(items) {
   var container = document.getElementById("blog-list");
   if (!container) return;
 
-  var items = (typeof BLOG_POSTS !== "undefined") ? BLOG_POSTS.slice() : [];
+  items = (items || []).slice();
 
   if (!items.length) {
     container.innerHTML =

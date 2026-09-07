@@ -63,7 +63,7 @@
         <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l2-3h4l2 3"/><circle cx="12" cy="13.5" r="3.5"/></svg></div>
         <h3>Foto- &amp; Videoaufnahmen</h3>
         <p>Foto- und Videoaufnahmen von Veranstaltungen und Familienfeiern &ndash; ich halte Ihre besonderen Momente fest.</p>
-        <span class="price-tag">75 € / Stunde + Anfahrt</span>
+        <span class="price-tag" id="price-hourly-badge">75 € / Stunde + Anfahrt</span>
       </div>
 
       <div class="card">
@@ -82,7 +82,7 @@
         <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="2.4"/><circle cx="16" cy="12" r="1"/></svg></div>
         <h3>Digitalisierung</h3>
         <p>Digitalisierung von VHS-Kassetten und Digital8-Kassetten &ndash; sichern Sie Ihre Erinnerungen dauerhaft.</p>
-        <span class="price-tag">10&ndash;15 € pro Kassette</span>
+        <span class="price-tag" id="price-digitalisierung-badge">10&ndash;15 € pro Kassette</span>
       </div>
 
       <div class="card">
@@ -101,27 +101,27 @@
     <div class="price-list">
       <div class="price-row">
         <span class="price-what">Foto- &amp; Videoaufnahmen (Stundensatz)
-          <span class="price-note">zzgl. Anfahrtskosten von 0,40 € pro Kilometer</span>
+          <span class="price-note" id="price-hourly-note">zzgl. Anfahrtskosten von 0,40 € pro Kilometer</span>
         </span>
-        <span class="price-amount">75 € / Stunde</span>
+        <span class="price-amount" id="price-hourly-amount">75 € / Stunde</span>
       </div>
       <div class="price-row">
         <span class="price-what">Digitalisierung VHS-Kassette
-          <span class="price-note">pro Kassette, je nach Länge/Zustand</span>
+          <span class="price-note" id="price-vhs-note">pro Kassette, je nach Länge/Zustand</span>
         </span>
-        <span class="price-amount">10&ndash;15 €</span>
+        <span class="price-amount" id="price-vhs-amount">10&ndash;15 €</span>
       </div>
       <div class="price-row">
         <span class="price-what">Digitalisierung Digital8-Kassette
-          <span class="price-note">pro Kassette, je nach Länge/Zustand</span>
+          <span class="price-note" id="price-digital8-note">pro Kassette, je nach Länge/Zustand</span>
         </span>
-        <span class="price-amount">10&ndash;15 €</span>
+        <span class="price-amount" id="price-digital8-amount">10&ndash;15 €</span>
       </div>
       <div class="price-row">
         <span class="price-what">Videoschnitt, Drohnenaufnahmen &amp; Contentberatung
-          <span class="price-note">Umfang sehr unterschiedlich &ndash; individuelles Angebot</span>
+          <span class="price-note" id="price-other-note">Umfang sehr unterschiedlich &ndash; individuelles Angebot</span>
         </span>
-        <span class="price-amount">auf Anfrage</span>
+        <span class="price-amount" id="price-other-amount">auf Anfrage</span>
       </div>
     </div>
 
@@ -178,9 +178,6 @@
   </div>
 </footer>
 
-<script src="data/events.js"></script>
-<script src="data/blog.js"></script>
-<script src="data/contact.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

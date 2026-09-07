@@ -1,0 +1,100 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Bilder werden hier hochgeladen/abgelegt:
+media_folder: "assets/img"
+public_folder: "/assets/img"
+
+site_url: https://eschenbach1234567-hub.github.io/JZoEntertainment-/
+logo_url: /assets/img/logo-transparent.png
+locale: "de"
+
+collections:
+
+  - name: "prices"
+    label: "Preise"
+    label_singular: "Preise"
+    files:
+      - file: "data/prices.json"
+        label: "Preisübersicht (Dienstleistungen-Seite)"
+        name: "prices"
+        fields:
+          - label: "Stundensatz Foto/Video"
+            name: "hourly"
+            widget: "object"
+            fields:
+              - { label: "Betrag (z. B. 75 € / Stunde)", name: "amount", widget: "string" }
+              - { label: "Zusatz-Hinweis", name: "note", widget: "string" }
+          - label: "VHS-Kassette digitalisieren"
+            name: "vhs"
+            widget: "object"
+            fields:
+              - { label: "Betrag (z. B. 10–15 €)", name: "amount", widget: "string" }
+              - { label: "Zusatz-Hinweis", name: "note", widget: "string" }
+          - label: "Digital8-Kassette digitalisieren"
+            name: "digital8"
+            widget: "object"
+            fields:
+              - { label: "Betrag (z. B. 10–15 €)", name: "amount", widget: "string" }
+              - { label: "Zusatz-Hinweis", name: "note", widget: "string" }
+          - label: "Videoschnitt / Drohne / Contentberatung"
+            name: "other"
+            widget: "object"
+            fields:
+              - { label: "Betrag (z. B. auf Anfrage)", name: "amount", widget: "string" }
+              - { label: "Zusatz-Hinweis", name: "note", widget: "string" }
+
+  - name: "contact"
+    label: "Kontaktdaten"
+    label_singular: "Kontaktdaten"
+    files:
+      - file: "data/contact.json"
+        label: "Kontakt (Header, Footer, Kontaktseite)"
+        name: "contact"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Adresse", name: "addressLine", widget: "string" }
+          - { label: "Telefonnummer (sichtbarer Text)", name: "phoneDisplay", widget: "string" }
+          - { label: "Telefonnummer für Anruf-Link (Format +49...)", name: "phoneHref", widget: "string", hint: "Ohne Leerzeichen, mit +49 statt der 0 am Anfang." }
+          - { label: "E-Mail-Adresse", name: "email", widget: "string" }
+          - { label: "Instagram-Link", name: "instagramUrl", widget: "string" }
+          - { label: "YouTube-Link", name: "youtubeUrl", widget: "string" }
+          - { label: "Instagram-Anzeigename (z. B. @JZoEntertainment)", name: "instagramHandle", widget: "string" }
+
+  - name: "blog"
+    label: "Blog"
+    label_singular: "Blogbeitrag"
+    files:
+      - file: "data/blog.json"
+        label: "Blogbeiträge"
+        name: "blog"
+        fields:
+          - label: "Beiträge"
+            name: "posts"
+            widget: "list"
+            label_singular: "Beitrag"
+            summary: "{{title}} ({{date}})"
+            fields:
+              - { label: "Titel", name: "title", widget: "string" }
+              - { label: "Datum", name: "date", widget: "date", date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
+              - { label: "Text", name: "text", widget: "text" }
+
+  - name: "events"
+    label: "Termine"
+    label_singular: "Termin"
+    files:
+      - file: "data/events.json"
+        label: "Termine"
+        name: "events"
+        fields:
+          - label: "Termine"
+            name: "events"
+            widget: "list"
+            label_singular: "Termin"
+            summary: "{{title}} ({{date}})"
+            fields:
+              - { label: "Titel", name: "title", widget: "string" }
+              - { label: "Datum", name: "date", widget: "date", date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
+              - { label: "Ort", name: "location", widget: "string", required: false }
+              - { label: "Beschreibung", name: "description", widget: "text" }
