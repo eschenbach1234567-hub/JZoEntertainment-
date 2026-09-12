@@ -127,6 +127,7 @@ function renderBlog(items) {
   container.innerHTML = items.map(function (post) {
     return (
       '<div class="card">' +
+        (post.image ? '<div class="card-img-wrap"><img class="card-img" src="' + escapeHtml(post.image) + '" alt="' + escapeHtml(post.title || "") + '"></div>' : "") +
         (post.date ? '<p style="color:var(--gold-1);font-weight:600;margin-bottom:8px;">' + escapeHtml(formatDate(post.date)) + "</p>" : "") +
         "<h3>" + escapeHtml(post.title || "") + "</h3>" +
         "<p>" + escapeHtml(post.text || "") + "</p>" +

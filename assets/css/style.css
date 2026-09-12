@@ -310,6 +310,19 @@ nav.main-nav a.active {
 
 .card-icon svg { width: 24px; height: 24px; }
 
+.card-img-wrap {
+  margin: -28px -28px 18px;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.card-img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
 .card h3 {
   font-size: 18px;
   margin: 0 0 10px;

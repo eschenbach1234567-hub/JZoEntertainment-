@@ -78,6 +78,7 @@ collections:
             fields:
               - { label: "Titel", name: "title", widget: "string" }
               - { label: "Datum", name: "date", widget: "date", date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
+              - { label: "Bild", name: "image", widget: "image", required: false, hint: "Optional – wird oben im Beitrag angezeigt." }
               - { label: "Text", name: "text", widget: "text" }
 
   - name: "events"
