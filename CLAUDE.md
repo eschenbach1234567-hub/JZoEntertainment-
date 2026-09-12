@@ -56,6 +56,13 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
    – wurde ihm direkt als Datei geschickt, liegt nicht im Repo.
 9. Instagram-Post-Grafik im Website-Design erstellt (Claude-Design-
    Canvas-Artifact, nicht im Repo).
+10. PWA/"Zum Home-Bildschirm hinzufügen" eingerichtet (Manifest,
+    Apple-Touch-Icons, Meta-Tags auf allen 8 Seiten) – von Jan auf
+    iPhone (Safari) und Mac (Dock) erfolgreich getestet. Bebilderte
+    PDF-Anleitung dafür an Jan geschickt, nicht im Repo.
+11. Bild-Feld für Blogbeiträge im Admin-Bereich ergänzt (`admin/config.yml`,
+    Collection "blog") – Jan kann jetzt beim Schreiben eines Blogposts
+    optional ein Bild hochladen, das oben in der Beitragskarte erscheint.
 
 ## Wichtige Eigenheiten / nicht "reparieren"
 
@@ -85,10 +92,6 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
 - Preise für Videoschnitt, Drohnenaufnahmen und Contentberatung stehen
   noch auf "auf Anfrage" (`data/prices.json`, Feld `other`) – Jan
   wollte die später selbst ergänzen, sobald er sich festgelegt hat.
-- Blog-Beiträge im Admin-Bereich haben aktuell keine Bildeinbindung
-  (nur Titel/Datum/Text) – Jan wollte Blogposts mit Bild machen; das
-  CMS-Feld dafür wurde noch nicht ergänzt (siehe `admin/config.yml`,
-  Collection "blog").
 
 ## Wie weitermachen
 
