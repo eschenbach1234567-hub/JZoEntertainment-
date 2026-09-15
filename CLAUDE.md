@@ -74,6 +74,31 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
     unabhängig geblieben – der optionale Preis-Hinweis auf der
     Leistungskarte muss bei Preisänderungen von Jan separat mit-
     aktualisiert werden (bewusst so gebaut, kein automatischer Abgleich).
+13. Restliche Seitentexte ebenfalls ins CMS geholt (Jan wollte "alles"
+    bearbeiten können): neue Collection "Seiteninhalte" mit Home
+    (`data/home.json`), Über mich (`data/ueber-mich.json`), Kontakt-Seite
+    (`data/kontakt-seite.json`), Impressum (`data/impressum.json`) und
+    Datenschutz (`data/datenschutz.json`). Dienstleistungen-/Events-/
+    Blog-Seitenüberschriften wurden direkt in die jeweils bestehende
+    Collection mit-integriert. Impressum/Datenschutz nutzen ein
+    Markdown-Rich-Text-Feld (Decap zeigt Jan dafür einen Word-ähnlichen
+    Editor mit Fett/Kursiv/Überschrift/Liste-Knöpfen, kein rohes
+    Markdown zu tippen); gerendert wird per marked.js von cdnjs
+    (`impressum.html`/`datenschutz.html` laden das Skript), mit
+    eingebautem Klartext-Fallback in `main.js`, falls das Skript mal
+    nicht lädt. Damit kann Jan jetzt z. B. auch selbst eine USt-ID
+    im Impressum ergänzen, falls zutreffend.
+    NICHT ins CMS übernommen (bewusst, gilt als Seitenstruktur/UI, nicht
+    als Inhalt): Navigationspunkte, Fußzeile/Copyright, Knopf-Beschriftungen
+    außer dem E-Mail-Knopf auf der Kontaktseite. Falls Jan auch das ändern
+    will: einfach ansprechen, ist mit dem gleichen Muster machbar.
+    WICHTIG für künftige IDs: main.js läuft unverändert auf jeder Seite
+    und lädt dabei ALLE data/*.json-Dateien, nicht nur die zur aktuellen
+    Seite passenden. Darum müssen alle `id`-Attribute, die per JS befüllt
+    werden, seitenübergreifend eindeutig sein (z. B. "dienst-heading" statt
+    generisch "page-heading") – sonst überschreiben sich gleichnamige
+    Felder verschiedener Seiten gegenseitig, je nachdem welcher fetch
+    zuerst fertig ist (ist beim Bau dieses Punkts passiert, gefixt).
 
 ## Wichtige Eigenheiten / nicht "reparieren"
 
@@ -103,13 +128,10 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
 - Preise für Videoschnitt, Drohnenaufnahmen und Contentberatung stehen
   noch auf "auf Anfrage" (`data/prices.json`, Feld `other`) – Jan
   wollte die später selbst ergänzen, sobald er sich festgelegt hat.
-- Jan wollte "alle Bereiche der Website bearbeiten können". Umgesetzt
-  ist bisher: Preise, Kontakt, Blog (inkl. Bild), Termine, Dienstleistungen.
-  Noch NICHT im CMS (weiterhin festes HTML): Home-Hero-Text/Tagline,
-  der Fließtext auf "Über mich", die Texte auf Kontakt/Impressum/
-  Datenschutz. Falls Jan das als Nächstes anspricht: als weitere
-  Dateien-Collection(en) mit Textfeldern ergänzen, nach demselben Muster
-  wie bei "Dienstleistungen"/"Kontakt".
+- Jan wollte "alle Bereiche der Website bearbeiten können" – erledigt,
+  siehe Punkt 13 oben. Alle Fließtexte/Überschriften sind jetzt im CMS
+  pflegbar. Bewusst draußen gelassen: Navigation, Footer/Copyright,
+  Knopf-Texte (außer Kontakt-E-Mail-Knopf) – gilt als Seitenstruktur.
 
 ## Wie weitermachen
 
