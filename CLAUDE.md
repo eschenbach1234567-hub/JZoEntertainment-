@@ -63,6 +63,17 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
 11. Bild-Feld für Blogbeiträge im Admin-Bereich ergänzt (`admin/config.yml`,
     Collection "blog") – Jan kann jetzt beim Schreiben eines Blogposts
     optional ein Bild hochladen, das oben in der Beitragskarte erscheint.
+12. Dienstleistungen ins CMS geholt: waren bisher fest im HTML (Home-Teaser
+    UND Dienstleistungen-Seite je eigene Kopie). Jetzt zentral in
+    `data/services.json` (Titel, Beschreibung, Symbol aus fester Auswahl,
+    optionaler Preis-Hinweis), neue CMS-Collection "Dienstleistungen" –
+    Jan kann Leistungen bearbeiten, neue hinzufügen, welche löschen.
+    Home und Dienstleistungen-Seite zeigen dieselben Einträge (ein
+    Bearbeiten wirkt sich auf beide Seiten aus). Die eigentliche
+    Preistabelle (`data/prices.json`, Collection "Preise") ist davon
+    unabhängig geblieben – der optionale Preis-Hinweis auf der
+    Leistungskarte muss bei Preisänderungen von Jan separat mit-
+    aktualisiert werden (bewusst so gebaut, kein automatischer Abgleich).
 
 ## Wichtige Eigenheiten / nicht "reparieren"
 
@@ -92,6 +103,13 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
 - Preise für Videoschnitt, Drohnenaufnahmen und Contentberatung stehen
   noch auf "auf Anfrage" (`data/prices.json`, Feld `other`) – Jan
   wollte die später selbst ergänzen, sobald er sich festgelegt hat.
+- Jan wollte "alle Bereiche der Website bearbeiten können". Umgesetzt
+  ist bisher: Preise, Kontakt, Blog (inkl. Bild), Termine, Dienstleistungen.
+  Noch NICHT im CMS (weiterhin festes HTML): Home-Hero-Text/Tagline,
+  der Fließtext auf "Über mich", die Texte auf Kontakt/Impressum/
+  Datenschutz. Falls Jan das als Nächstes anspricht: als weitere
+  Dateien-Collection(en) mit Textfeldern ergänzen, nach demselben Muster
+  wie bei "Dienstleistungen"/"Kontakt".
 
 ## Wie weitermachen
 
