@@ -70,6 +70,14 @@ collections:
         label: "Dienstleistungen (Home & Dienstleistungen-Seite)"
         name: "services"
         fields:
+          - { label: "Überschrift-Kürzel (z. B. \"Dienstleistungen\")", name: "eyebrow", widget: "string" }
+          - { label: "Überschrift", name: "heading", widget: "string" }
+          - { label: "Einleitungstext", name: "intro", widget: "text" }
+          - { label: "Überschrift-Kürzel Preisbereich", name: "pricesEyebrow", widget: "string" }
+          - { label: "Überschrift Preisbereich", name: "pricesHeading", widget: "string" }
+          - { label: "Einleitungstext Preisbereich", name: "pricesIntro", widget: "text" }
+          - { label: "Überschrift Angebots-Box (unten)", name: "ctaHeading", widget: "string" }
+          - { label: "Text Angebots-Box (unten)", name: "ctaText", widget: "text" }
           - label: "Leistungen"
             name: "services"
             widget: "list"
@@ -99,6 +107,9 @@ collections:
         label: "Blogbeiträge"
         name: "blog"
         fields:
+          - { label: "Überschrift-Kürzel", name: "eyebrow", widget: "string" }
+          - { label: "Überschrift", name: "heading", widget: "string" }
+          - { label: "Einleitungstext", name: "intro", widget: "text" }
           - label: "Beiträge"
             name: "posts"
             widget: "list"
@@ -118,6 +129,9 @@ collections:
         label: "Termine"
         name: "events"
         fields:
+          - { label: "Überschrift-Kürzel", name: "eyebrow", widget: "string" }
+          - { label: "Überschrift", name: "heading", widget: "string" }
+          - { label: "Einleitungstext", name: "intro", widget: "text" }
           - label: "Termine"
             name: "events"
             widget: "list"
@@ -128,3 +142,57 @@ collections:
               - { label: "Datum", name: "date", widget: "date", date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
               - { label: "Ort", name: "location", widget: "string", required: false }
               - { label: "Beschreibung", name: "description", widget: "text" }
+
+  - name: "pages"
+    label: "Seiteninhalte"
+    label_singular: "Seite"
+    files:
+      - file: "data/home.json"
+        label: "Startseite"
+        name: "home"
+        fields:
+          - { label: "Hauptüberschrift (unter dem Logo)", name: "heroTagline", widget: "string" }
+          - { label: "Begrüßungstext", name: "heroText", widget: "text" }
+          - { label: "Einleitungstext \"Das biete ich an\"", name: "servicesIntro", widget: "text" }
+          - { label: "Überschrift \"Über mich\"-Vorschau", name: "aboutHeading", widget: "string" }
+          - { label: "Text \"Über mich\"-Vorschau", name: "aboutText", widget: "text" }
+          - { label: "Überschrift Angebots-Box (unten)", name: "contactHeading", widget: "string" }
+          - { label: "Text Angebots-Box (unten)", name: "contactText", widget: "text" }
+
+      - file: "data/ueber-mich.json"
+        label: "Über mich"
+        name: "ueber-mich"
+        fields:
+          - { label: "Überschrift-Kürzel", name: "eyebrow", widget: "string" }
+          - { label: "Überschrift", name: "heading", widget: "string" }
+          - { label: "Text", name: "text", widget: "text", hint: "Für einen Absatz-Umbruch eine leere Zeile zwischen zwei Absätzen lassen." }
+
+      - file: "data/kontakt-seite.json"
+        label: "Kontakt-Seite (Überschrift-Text)"
+        name: "kontakt-seite"
+        fields:
+          - { label: "Überschrift-Kürzel", name: "eyebrow", widget: "string" }
+          - { label: "Überschrift", name: "heading", widget: "string" }
+          - { label: "Einleitungstext", name: "intro", widget: "text" }
+          - { label: "Text auf dem E-Mail-Knopf", name: "emailButtonText", widget: "string" }
+
+      - file: "data/impressum.json"
+        label: "Impressum"
+        name: "impressum"
+        fields:
+          - { label: "Einleitungszeile (unter der Überschrift)", name: "intro", widget: "string" }
+          - label: "Inhalt"
+            name: "content"
+            widget: "markdown"
+            hint: "Rechtlicher Inhalt des Impressums. Bitte vorsichtig bearbeiten – im Zweifel vorher mit Claude oder einem Anwalt/Steuerberater absprechen. Hier kann z. B. auch eine Umsatzsteuer-ID ergänzt werden, falls vorhanden."
+            buttons: ["bold", "italic", "link", "heading-two", "quote", "bulleted-list", "numbered-list"]
+
+      - file: "data/datenschutz.json"
+        label: "Datenschutz"
+        name: "datenschutz"
+        fields:
+          - label: "Inhalt"
+            name: "content"
+            widget: "markdown"
+            hint: "Rechtlicher Inhalt der Datenschutzerklärung. Bitte vorsichtig bearbeiten – im Zweifel vorher mit Claude oder einem Anwalt/Datenschutzexperten absprechen."
+            buttons: ["bold", "italic", "link", "heading-two", "quote", "bulleted-list", "numbered-list"]

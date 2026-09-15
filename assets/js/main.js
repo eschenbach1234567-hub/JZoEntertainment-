@@ -12,16 +12,121 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   loadJson("data/contact.json").then(renderContact);
-  loadJson("data/events.json").then(function (data) { renderEvents(data && data.events); });
-  loadJson("data/blog.json").then(function (data) { renderBlog(data && data.posts); });
+  loadJson("data/events.json").then(function (data) {
+    renderPageText(data, { eyebrow: "events-eyebrow", heading: "events-heading", intro: "events-intro" });
+    renderEvents(data && data.events);
+  });
+  loadJson("data/blog.json").then(function (data) {
+    renderPageText(data, { eyebrow: "blog-eyebrow", heading: "blog-heading", intro: "blog-intro" });
+    renderBlog(data && data.posts);
+  });
   loadJson("data/prices.json").then(renderPrices);
-  loadJson("data/services.json").then(function (data) { renderServices(data && data.services); });
+  loadJson("data/services.json").then(function (data) {
+    renderPageText(data, {
+      eyebrow: "dienst-eyebrow", heading: "dienst-heading", intro: "dienst-intro",
+      pricesEyebrow: "prices-eyebrow", pricesHeading: "prices-heading", pricesIntro: "prices-intro",
+      ctaHeading: "cta-heading", ctaText: "cta-text",
+    });
+    renderServices(data && data.services);
+  });
+  loadJson("data/home.json").then(function (data) {
+    renderPageText(data, {
+      heroTagline: "hero-tagline", heroText: "hero-text", servicesIntro: "services-intro",
+      aboutHeading: "about-heading", aboutText: "about-text",
+      contactHeading: "contact-heading", contactText: "contact-text",
+    });
+  });
+  loadJson("data/ueber-mich.json").then(function (data) {
+    if (!data) return;
+    renderPageText(data, { eyebrow: "about-page-eyebrow", heading: "about-page-heading" });
+    renderParagraphs(document.getElementById("about-page-text-block"), data.text);
+  });
+  loadJson("data/kontakt-seite.json").then(function (data) {
+    renderPageText(data, {
+      eyebrow: "kontakt-eyebrow", heading: "kontakt-heading", intro: "kontakt-intro",
+      emailButtonText: "email-button-text",
+    });
+  });
+  loadJson("data/impressum.json").then(function (data) {
+    if (!data) return;
+    renderPageText(data, { intro: "impressum-intro" });
+    renderMarkdown(document.getElementById("impressum-content"), data.content);
+  });
+  loadJson("data/datenschutz.json").then(function (data) {
+    if (!data) return;
+    renderMarkdown(document.getElementById("datenschutz-content"), data.content);
+  });
 });
 
 function loadJson(path) {
   return fetch(path)
     .then(function (res) { return res.ok ? res.json() : null; })
     .catch(function () { return null; });
+}
+
+function renderPageText(data, idMap) {
+  if (!data) return;
+  Object.keys(idMap).forEach(function (field) {
+    if (data[field] === undefined) return;
+    var el = document.getElementById(idMap[field]);
+    if (el) el.textContent = data[field];
+  });
+}
+
+function renderParagraphs(container, text) {
+  if (!container) return;
+  var paragraphs = (text || "")
+    .split(/\n\s*\n/)
+    .map(function (p) { return p.trim(); })
+    .filter(Boolean);
+
+  container.innerHTML = paragraphs
+    .map(function (p) { return "<p>" + escapeHtml(p).replace(/\n/g, "<br>") + "</p>"; })
+    .join("");
+}
+
+function renderMarkdown(container, markdownText) {
+  if (!container) return;
+  if (window.marked && typeof markdownText === "string") {
+    container.innerHTML = marked.parse(markdownText);
+  } else {
+    renderMarkdownFallback(container, markdownText);
+  }
+}
+
+// Einfache Notloesung, falls die marked.js-Bibliothek (von cdnjs) mal nicht
+// laedt: erkennt Ueberschriften (##), Links ([Text](URL)) und Listen (- ...),
+// statt rohe Markdown-Zeichen anzuzeigen.
+function renderMarkdownFallback(container, text) {
+  if (!container) return;
+
+  var blocks = (text || "")
+    .split(/\n\s*\n/)
+    .map(function (b) { return b.trim(); })
+    .filter(Boolean);
+
+  container.innerHTML = blocks.map(function (block) {
+    var lines = block.split("\n").map(function (l) { return l.trim(); }).filter(Boolean);
+
+    if (lines.every(function (l) { return /^[-*]\s+/.test(l); })) {
+      return "<ul>" + lines.map(function (l) {
+        return "<li>" + inlineMarkdown(l.replace(/^[-*]\s+/, "")) + "</li>";
+      }).join("") + "</ul>";
+    }
+
+    var headingMatch = block.match(/^#{1,6}\s+(.*)$/);
+    if (headingMatch) {
+      return "<h2>" + inlineMarkdown(headingMatch[1]) + "</h2>";
+    }
+
+    return "<p>" + lines.map(inlineMarkdown).join("<br>") + "</p>";
+  }).join("");
+}
+
+function inlineMarkdown(text) {
+  return escapeHtml(text).replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (_, label, url) {
+    return '<a href="' + url + '" style="color:var(--gold-1);">' + label + "</a>";
+  });
 }
 
 function renderContact(contact) {

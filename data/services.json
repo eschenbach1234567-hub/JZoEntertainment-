@@ -1,4 +1,12 @@
 {
+  "eyebrow": "Dienstleistungen",
+  "heading": "Das biete ich an",
+  "intro": "Alle Leistungen im Überblick – sprechen Sie mich einfach für ein individuelles Angebot an.",
+  "pricesEyebrow": "Preise",
+  "pricesHeading": "Preisübersicht",
+  "pricesIntro": "Alle Preise sind Richtwerte und können je nach Aufwand variieren – gerne erstelle ich Ihnen ein individuelles Angebot.",
+  "ctaHeading": "Gerne mache ich Ihnen ein Angebot!",
+  "ctaText": "Schreiben Sie mir einfach kurz, worum es geht.",
   "services": [
     {
       "title": "Foto- & Videoaufnahmen",

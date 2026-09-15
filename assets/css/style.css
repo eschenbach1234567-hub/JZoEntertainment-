@@ -192,6 +192,7 @@ nav.main-nav a.active {
   font-weight: 700;
   color: var(--silver-1);
   max-width: 720px;
+  overflow-wrap: break-word;
 }
 
 .hero-text {
