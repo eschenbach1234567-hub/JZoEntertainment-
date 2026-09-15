@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   loadJson("data/events.json").then(function (data) { renderEvents(data && data.events); });
   loadJson("data/blog.json").then(function (data) { renderBlog(data && data.posts); });
   loadJson("data/prices.json").then(renderPrices);
+  loadJson("data/services.json").then(function (data) { renderServices(data && data.services); });
 });
 
 function loadJson(path) {
@@ -55,10 +56,8 @@ function renderPrices(prices) {
   if (!prices) return;
 
   var map = {
-    "price-hourly-badge": prices.hourly.amount + " + Anfahrt",
     "price-hourly-amount": prices.hourly.amount,
     "price-hourly-note": prices.hourly.note,
-    "price-digitalisierung-badge": prices.vhs.amount + " pro Kassette",
     "price-vhs-amount": prices.vhs.amount,
     "price-vhs-note": prices.vhs.note,
     "price-digital8-amount": prices.digital8.amount,
@@ -134,6 +133,44 @@ function renderBlog(items) {
       "</div>"
     );
   }).join("");
+}
+
+function renderServices(items) {
+  var container = document.getElementById("services-list");
+  if (!container) return;
+
+  items = items || [];
+
+  if (!items.length) {
+    container.innerHTML =
+      '<div class="empty-state">' +
+      "<p>Aktuell sind hier keine Dienstleistungen hinterlegt.</p>" +
+      "</div>";
+    return;
+  }
+
+  container.innerHTML = items.map(function (s) {
+    return (
+      '<div class="card">' +
+        '<div class="card-icon">' + iconForService(s.icon) + "</div>" +
+        "<h3>" + escapeHtml(s.title || "") + "</h3>" +
+        "<p>" + escapeHtml(s.description || "") + "</p>" +
+        (s.badge ? '<span class="price-tag">' + escapeHtml(s.badge) + "</span>" : "") +
+      "</div>"
+    );
+  }).join("");
+}
+
+function iconForService(key) {
+  var icons = {
+    kamera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l2-3h4l2 3"/><circle cx="12" cy="13.5" r="3.5"/></svg>',
+    videoschnitt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7l6 5-6 5V7z"/><path d="M14 7l6 5-6 5V7z"/></svg>',
+    drohne: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v4M5 8l2.5 2.5M19 8l-2.5 2.5"/><circle cx="12" cy="13" r="3"/><path d="M4 21c1.5-2 4-3 8-3s6.5 1 8 3"/></svg>',
+    digitalisierung: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="2.4"/><circle cx="16" cy="12" r="1"/></svg>',
+    beratung: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v5h5"/></svg>',
+    sonstiges: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 16.9 6.4 20.1l1.4-6.3L3 9.5l6.4-.6z"/></svg>',
+  };
+  return icons[key] || icons.sonstiges;
 }
 
 function iconCalendar() {

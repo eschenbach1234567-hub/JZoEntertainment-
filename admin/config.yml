@@ -62,6 +62,35 @@ collections:
           - { label: "YouTube-Link", name: "youtubeUrl", widget: "string" }
           - { label: "Instagram-Anzeigename (z. B. @JZoEntertainment)", name: "instagramHandle", widget: "string" }
 
+  - name: "services"
+    label: "Dienstleistungen"
+    label_singular: "Dienstleistung"
+    files:
+      - file: "data/services.json"
+        label: "Dienstleistungen (Home & Dienstleistungen-Seite)"
+        name: "services"
+        fields:
+          - label: "Leistungen"
+            name: "services"
+            widget: "list"
+            label_singular: "Leistung"
+            summary: "{{title}}"
+            fields:
+              - { label: "Titel", name: "title", widget: "string" }
+              - { label: "Beschreibung", name: "description", widget: "text" }
+              - label: "Symbol"
+                name: "icon"
+                widget: "select"
+                hint: "Passendes Symbol für die Karte auswählen."
+                options:
+                  - { label: "Kamera (Foto/Video)", value: "kamera" }
+                  - { label: "Videoschnitt", value: "videoschnitt" }
+                  - { label: "Drohne", value: "drohne" }
+                  - { label: "Digitalisierung (Kassette)", value: "digitalisierung" }
+                  - { label: "Beratung (Dokument)", value: "beratung" }
+                  - { label: "Sonstiges (Stern)", value: "sonstiges" }
+              - { label: "Preis-Hinweis auf der Karte (optional)", name: "badge", widget: "string", required: false, hint: "Z. B. \"75 € / Stunde\" oder \"ab 50 €\" – leer lassen für keinen Hinweis. Unabhängig von der Preisübersicht weiter unten, dort ggf. auch anpassen." }
+
   - name: "blog"
     label: "Blog"
     label_singular: "Blogbeitrag"

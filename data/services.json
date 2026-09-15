@@ -1,0 +1,34 @@
+{
+  "services": [
+    {
+      "title": "Foto- & Videoaufnahmen",
+      "description": "Foto- und Videoaufnahmen von Veranstaltungen und Familienfeiern – ich halte Ihre besonderen Momente fest.",
+      "icon": "kamera",
+      "badge": "75 € / Stunde + Anfahrt"
+    },
+    {
+      "title": "Videoschnitt",
+      "description": "Videoschnitt von fremden Aufnahmen – ich schneide und bearbeite Ihr vorhandenes Videomaterial.",
+      "icon": "videoschnitt",
+      "badge": ""
+    },
+    {
+      "title": "Drohnenaufnahmen",
+      "description": "Luftaufnahmen per Drohne für einzigartige Perspektiven auf Ihre Veranstaltung oder Ihr Objekt.",
+      "icon": "drohne",
+      "badge": ""
+    },
+    {
+      "title": "Digitalisierung",
+      "description": "Digitalisierung von VHS-Kassetten und Digital8-Kassetten – sichern Sie Ihre Erinnerungen dauerhaft.",
+      "icon": "digitalisierung",
+      "badge": "10–15 € pro Kassette"
+    },
+    {
+      "title": "Contentberatung",
+      "description": "Contentberatung für kleine und mittelständige Betriebe – rund um Foto- und Video-Content.",
+      "icon": "beratung",
+      "badge": ""
+    }
+  ]
+}
