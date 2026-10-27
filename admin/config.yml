@@ -196,3 +196,97 @@ collections:
             widget: "markdown"
             hint: "Rechtlicher Inhalt der Datenschutzerklärung. Bitte vorsichtig bearbeiten – im Zweifel vorher mit Claude oder einem Anwalt/Datenschutzexperten absprechen."
             buttons: ["bold", "italic", "link", "heading-two", "quote", "bulleted-list", "numbered-list"]
+
+  - name: "video-app"
+    label: "Video-App (JZo Video AI)"
+    label_singular: "Video-App"
+    media_folder: "/assets/img/video-sticker"
+    public_folder: "/assets/img/video-sticker"
+    files:
+      - file: "video/data/library.json"
+        label: "Effekte, Übergänge, Looks, Sticker & KI-Modelle"
+        name: "library"
+        fields:
+          - label: "Effekt-Pakete (Kombination aus eingebauten Effekten)"
+            name: "packs"
+            widget: "list"
+            label_singular: "Effekt-Paket"
+            summary: "{{icon}} {{name}}"
+            required: false
+            hint: "Erscheint in der App unter Effekte → Pakete. Ein Paket legt mehrere Effekte auf einmal auf einen Clip."
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Symbol (ein Emoji, z. B. 🔥)", name: "icon", widget: "string", required: false }
+              - label: "Enthaltene Effekte"
+                name: "items"
+                widget: "list"
+                label_singular: "Effekt"
+                summary: "{{fx}} ({{amount}})"
+                fields:
+                  - { label: "Effekt", name: "fx", widget: "select", options: [{ label: "Glitch", value: "glitch" }, { label: "RGB-Split", value: "rgbsplit" }, { label: "VHS", value: "vhs" }, { label: "Scanlines", value: "scanlines" }, { label: "Verpixeln", value: "pixelate" }, { label: "Strobo-Blitz", value: "strobe" }, { label: "Farbwechsel", value: "huecycle" }, { label: "Wärmebild", value: "thermal" }, { label: "Kaleidoskop", value: "kaleido" }, { label: "Negativ", value: "invert" }, { label: "Filmkorn", value: "grain" }, { label: "Vignette", value: "vignette" }, { label: "Unschärfe", value: "blur" }, { label: "Schwarz-Weiß", value: "bw" }, { label: "Sepia", value: "sepia" }, { label: "Spiegeln", value: "mirror" }, { label: "Comic/Poster", value: "posterize" }, { label: "Light Leak", value: "lightleak" }, { label: "Fischauge", value: "fisheye" }, { label: "Kino-Balken", value: "cinebars" }, { label: "Zoom rein", value: "zoomIn" }, { label: "Zoom raus", value: "zoomOut" }, { label: "Beat-Zoom", value: "punch" }, { label: "Ken Burns (Schwenk)", value: "kenburns" }, { label: "Wackel-Kamera", value: "shake" }, { label: "Erdbeben", value: "quake" }, { label: "Schaukeln", value: "wobble" }, { label: "Dreh-Einstieg", value: "spinIn" }, { label: "Bounce-Einstieg", value: "bounceIn" }] }
+                  - { label: "Stärke (0 bis 1, z. B. 0.5)", name: "amount", widget: "number", value_type: "float", min: 0, max: 1, step: 0.05, default: 0.5 }
+          - label: "Eigene Übergänge"
+            name: "transitions"
+            widget: "list"
+            label_singular: "Übergang"
+            summary: "{{icon}} {{name}}"
+            required: false
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Symbol (Emoji)", name: "icon", widget: "string", required: false }
+              - { label: "Art des Übergangs", name: "base", widget: "select", options: [{ label: "Überblenden", value: "fade" }, { label: "Über Schwarz", value: "dipblack" }, { label: "Über Weiß", value: "dipwhite" }, { label: "Wischen links", value: "wipeL" }, { label: "Wischen rechts", value: "wipeR" }, { label: "Wischen hoch", value: "wipeUp" }, { label: "Schieben", value: "pushL" }, { label: "Schieben rechts", value: "slideR" }, { label: "Whip Pan", value: "whip" }, { label: "Zoom rein", value: "zoomIn" }, { label: "Zoom raus", value: "zoomOut" }, { label: "Glitch", value: "glitch" }, { label: "Kreis", value: "circle" }, { label: "Drehen", value: "spin" }, { label: "Blitz", value: "flash" }, { label: "Pixel", value: "pixel" }, { label: "Unschärfe", value: "blur" }, { label: "Film-Brand", value: "burn" }, { label: "Diagonal", value: "diag" }] }
+              - { label: "Dauer in Sekunden (z. B. 0.8)", name: "duration", widget: "number", value_type: "float", min: 0.1, max: 5, step: 0.1, default: 0.8 }
+          - label: "Farb-Looks"
+            name: "looks"
+            widget: "list"
+            label_singular: "Look"
+            summary: "{{icon}} {{name}}"
+            required: false
+            hint: "Erscheint in der App im Reiter Farbe unter Looks. 0 = keine Änderung."
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Symbol (Emoji)", name: "icon", widget: "string", required: false }
+              - { label: "Temperatur (-1 kalt bis +1 warm)", name: "temp", widget: "number", value_type: "float", min: -1, max: 1, step: 0.05, default: 0 }
+              - { label: "Tönung (-1 grün bis +1 magenta)", name: "tint", widget: "number", value_type: "float", min: -1, max: 1, step: 0.05, default: 0 }
+              - { label: "Belichtung (-2 bis +2)", name: "exposure", widget: "number", value_type: "float", min: -2, max: 2, step: 0.05, default: 0 }
+              - { label: "Kontrast (1 = normal)", name: "contrast", widget: "number", value_type: "float", min: 0.3, max: 2.5, step: 0.05, default: 1 }
+              - { label: "Sättigung (1 = normal, 0 = schwarz-weiß)", name: "saturation", widget: "number", value_type: "float", min: 0, max: 2, step: 0.05, default: 1 }
+              - { label: "Farbton drehen (Grad)", name: "hue", widget: "number", value_type: "int", min: -180, max: 180, default: 0 }
+              - { label: "Schatten anheben (-1 bis +1)", name: "shadows", widget: "number", value_type: "float", min: -1, max: 1, step: 0.05, default: 0 }
+              - { label: "Lichter (-1 bis +1)", name: "highlights", widget: "number", value_type: "float", min: -1, max: 1, step: 0.05, default: 0 }
+          - label: "Sticker / Cliparts (eigene Bilder)"
+            name: "stickers"
+            widget: "list"
+            label_singular: "Sticker"
+            summary: "{{name}}"
+            required: false
+            hint: "Am besten PNG mit durchsichtigem Hintergrund."
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Bild", name: "image", widget: "image" }
+              - { label: "Animation", name: "anim", widget: "select", default: "pop", options: [{ label: "Keine", value: "none" }, { label: "Reinploppen", value: "pop" }, { label: "Hüpfen", value: "bounce" }, { label: "Pulsieren", value: "pulse" }, { label: "Drehen", value: "spin" }, { label: "Schweben", value: "float" }, { label: "Zittern", value: "shake" }, { label: "Wackeln", value: "wiggle" }] }
+          - label: "KI-Modelle (ersetzt die Standardliste, wenn ausgefüllt)"
+            name: "aiModels"
+            widget: "list"
+            label_singular: "KI-Modell"
+            summary: "{{name}}"
+            required: false
+            hint: "Leer lassen = Standard (Higgsfield, Kling 4.0, Seedance 2.5, Google Veo, Runway)."
+            fields:
+              - { label: "Kurz-ID (z. B. kling5, ohne Leerzeichen)", name: "id", widget: "string" }
+              - { label: "Name (z. B. Kling 5.0)", name: "name", widget: "string" }
+              - { label: "Anbieter", name: "provider", widget: "string", required: false }
+              - { label: "Was es kann (kurz)", name: "kind", widget: "string", required: false }
+              - { label: "Link zur Website", name: "url", widget: "string" }
+              - { label: "Hinweis", name: "note", widget: "string", required: false }
+          - label: "KI-Effekt-Vorlagen (für Higgsfield, Kling & Co.)"
+            name: "aiEffects"
+            widget: "list"
+            label_singular: "KI-Effekt"
+            summary: "{{icon}} {{name}}"
+            required: false
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Symbol (Emoji)", name: "icon", widget: "string", required: false }
+              - { label: "Passendes Modell (Kurz-ID oder Name, z. B. higgsfield)", name: "model", widget: "string", required: false }
+              - { label: "Beschreibung für die KI (Englisch klappt am besten)", name: "prompt", widget: "text" }

@@ -1,0 +1,12 @@
+{
+  "packs": [
+    { "name": "JZo Signature", "icon": "🧡", "items": [ { "fx": "lightleak", "amount": 0.5 }, { "fx": "grain", "amount": 0.25 }, { "fx": "zoomIn", "amount": 0.4 } ] }
+  ],
+  "transitions": [
+    { "name": "Schneller Glitch", "icon": "⚡", "base": "glitch", "duration": 0.4 }
+  ],
+  "looks": [],
+  "stickers": [],
+  "aiModels": [],
+  "aiEffects": []
+}

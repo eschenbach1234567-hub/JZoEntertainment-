@@ -132,6 +132,40 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
     (Griffbrett, alle Lagen als Tab, Drei-/Vierklänge mit Griffbildern,
     Progressionen) inkl. "Als PDF / Drucken" (Print-CSS) und Text-Teilen.
 
+15. **JZo Video AI** (`video/`) – Jans Videoschnitt-App ("Yotso" in seiner
+    Nachricht = Diktierfehler für "JZo"), Link:
+    https://eschenbach1234567-hub.github.io/JZoEntertainment-/video/
+    Eigenständige PWA wie die Jam-App (eigenes Manifest/Icon/SW, `noindex`,
+    nicht auf der Website verlinkt), helles Design, läuft auf iPhone und Mac
+    (Safari → „Zum Dock hinzufügen“). Alles lokal im Browser, Medien +
+    Projekte in IndexedDB (`jzo-video`). Reiter: Medien, Schnitt (Timeline
+    mit Abspielkopf in der Mitte, Spuren T/V1/A1, Trimmen per Griffe,
+    Teilen, Tempo, Undo/Redo), Farbe (DaVinci-artig: bis 6 serielle Nodes
+    hinzufügen/auswählen/löschen/aus, Lift/Gamma/Gain/Offset-Räder,
+    Grundkorrektur, Looks, Grade kopieren/auf alle, Waveform), Effekte
+    (Glitch/Looks/Zooms per WebGL-Shader, 20 Übergänge, Partikel wie Feuer/
+    Feuer in der Hand/Blitze/Schnee, Emoji-Sticker, Texte; Kacheln antippen
+    oder auf Clip/ins Bild ziehen), KI, Export (Echtzeit-Aufnahme per
+    MediaRecorder, mp4 in Safari, dann Teilen/Sichern).
+    KI ehrlich gesagt: der „KI-Assistent“ ist ein regelbasierter deutscher
+    Befehls-Interpreter auf dem Gerät (`video/js/ai.js`), keine echte LLM.
+    Higgsfield/Kling 4.0/Seedance 2.5 sind NICHT per API verbunden (bräuchte
+    Server/Proxy + API-Schlüssel + Kosten) – stattdessen Übergabe-Ablauf:
+    Clip sichern → Prompt kopieren & Anbieter-Website öffnen → Ergebnis
+    zurück importieren (ersetzt markierten Clip). „Feuer in der Hand“ lokal
+    = Partikel-Effekt mit Keyframes (Jan zieht ihn an mehreren Stellen auf
+    die Hand), keine automatische Handverfolgung.
+    Erweiterbar über Admin: CMS-Collection „Video-App“ →
+    `video/data/library.json` (Effekt-Pakete aus eingebauten Effekten,
+    eigene Übergänge, Farb-Looks, Sticker-Bilder in
+    `assets/img/video-sticker/`, KI-Modell-Liste, KI-Prompt-Vorlagen).
+    Komplett neue Effekt-*Arten* brauchen Code (`video/js/library.js` +
+    Shader in `render.js`). Bei Änderungen `CACHE` in `video/sw.js`
+    hochzählen. Code: `library.js`, `render.js` (WebGL 2 Pässe + 2D-
+    Overlays/Partikel), `store.js`, `ai.js`, `app.js`.
+    Mögliche nächste Schritte: echte API-Anbindung Higgsfield/Kling über
+    kleinen Server (Netlify Function), echte Handverfolgung (MediaPipe).
+
 ## Wichtige Eigenheiten / nicht "reparieren"
 
 - **E-Mail-Adresse `jzoentertainmet@outlook.com`** – der Tippfehler
