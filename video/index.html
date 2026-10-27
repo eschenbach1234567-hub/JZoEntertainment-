@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>JZo Video AI</title>
-<meta name="description" content="Videoschnitt mit Farbkorrektur, Effekten und KI – JZo Entertainment Video AI.">
+<meta name="description" content="Videoschnitt wie DaVinci Resolve – mit Farbkorrektur, Effekten und KI. JZo Entertainment Video AI.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="img/icon-192.png" type="image/png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -23,52 +23,70 @@
   <div class="brand"><b>Video AI</b><span id="pj-title">Projekt</span></div>
   <button class="icon-btn" id="undo-btn" type="button" aria-label="Rückgängig" title="Rückgängig (⌘Z)" disabled>↶</button>
   <button class="icon-btn" id="redo-btn" type="button" aria-label="Wiederholen" title="Wiederholen (⇧⌘Z)" disabled>↷</button>
+  <button class="icon-btn desk-only" id="keys-btn" type="button" aria-label="Tastenkürzel" title="Tastenkürzel">⌨️</button>
+  <button class="icon-btn" id="set-btn" type="button" aria-label="Einstellungen" title="Einstellungen">⚙️</button>
   <button class="ai-btn" id="ai-btn" type="button">✨ KI</button>
 </header>
 
 <div class="work">
-  <div class="editor">
+  <aside class="side" id="left"></aside>
+
+  <section class="viewer">
     <div class="stage"><canvas id="view" width="960" height="540"></canvas></div>
     <div class="transport">
-      <span class="time" id="time">00:00.00</span>
+      <span class="tcbox"><span class="time" id="time">00:00:00:00</span><span class="dur" id="dur"></span></span>
       <div class="tp-mid">
-        <button class="icon-btn" id="start-btn" type="button" aria-label="Zum Anfang">⏮</button>
-        <button class="play" id="play-btn" type="button" aria-label="Abspielen"><span class="i-play">▶</span><span class="i-pause">❚❚</span></button>
-        <button class="icon-btn" id="end-btn" type="button" aria-label="Zum Ende">⏭</button>
+        <button class="icon-btn desk-only" id="start-btn" type="button" aria-label="Zum Anfang" title="Zum Anfang (Pos1)">⏮</button>
+        <button class="icon-btn" id="prev-btn" type="button" aria-label="Vorheriger Schnitt" title="Vorheriger Schnitt (↑)">⇤</button>
+        <button class="icon-btn desk-only" id="rev-btn" type="button" aria-label="Rückwärts" title="Rückwärts (J)">◀</button>
+        <button class="play" id="play-btn" type="button" aria-label="Abspielen" title="Abspielen / Stopp (Leertaste)"><span class="i-play">▶</span><span class="i-pause">■</span></button>
+        <button class="icon-btn" id="next-btn" type="button" aria-label="Nächster Schnitt" title="Nächster Schnitt (↓)">⇥</button>
+        <button class="icon-btn desk-only" id="end-btn" type="button" aria-label="Zum Ende" title="Zum Ende (Ende)">⏭</button>
       </div>
-      <div class="tp-right">
-        <button class="icon-btn" id="split-btn" type="button" aria-label="Teilen am Abspielkopf" title="Teilen (B)">✂️</button>
-        <button class="icon-btn" id="del-btn" type="button" aria-label="Markiertes löschen" title="Löschen">🗑</button>
-        <button class="icon-btn sm" id="zout-btn" type="button" aria-label="Timeline verkleinern">－</button>
-        <button class="icon-btn sm" id="zin-btn" type="button" aria-label="Timeline vergrößern">＋</button>
-      </div>
+      <span class="rate" id="rate"></span>
+      <button class="icon-btn" id="full-btn" type="button" aria-label="Vollbild" title="Vollbild (⌘F)">⛶</button>
+    </div>
+  </section>
+
+  <aside class="panel" id="panel"></aside>
+
+  <section class="tlbox">
+    <div class="tl-tools">
+      <button class="tool on" data-tool="select" type="button" title="Auswahl (A)" aria-label="Auswahl-Werkzeug">↖</button>
+      <button class="tool" data-tool="blade" type="button" title="Klinge (B)" aria-label="Klingen-Werkzeug">🔪</button>
+      <span class="sep"></span>
+      <button class="tool" id="split-btn" type="button" title="Am Playhead teilen (⌘B)" aria-label="Teilen">✂️</button>
+      <button class="tool" id="del-btn" type="button" title="Löschen (⌫)" aria-label="Löschen">🗑</button>
+      <span class="sep"></span>
+      <button class="tool on" id="snap-btn" type="button" title="Einrasten (N)" aria-label="Einrasten">🧲</button>
+      <button class="tool" id="mark-btn" type="button" title="Marker (M)" aria-label="Marker">◆</button>
+      <span class="grow"></span>
+      <button class="tool" id="zout-btn" type="button" title="Herauszoomen (⌘−)" aria-label="Timeline verkleinern">－</button>
+      <button class="tool" id="fit-btn" type="button" title="Einpassen (⇧Z)" aria-label="Timeline einpassen">⇔</button>
+      <button class="tool" id="zin-btn" type="button" title="Hineinzoomen (⌘+)" aria-label="Timeline vergrößern">＋</button>
     </div>
     <div class="tl-wrap">
       <div class="timeline" id="tl"><div class="tl-inner" id="tl-inner"></div></div>
       <div class="playhead"></div>
     </div>
-  </div>
-  <aside class="panel" id="panel"></aside>
+  </section>
+
+  <section class="bottom" id="bottom"></section>
 </div>
 
-<nav class="tabbar">
-  <button type="button" data-page="media"><i>📁</i>Medien</button>
-  <button type="button" data-page="edit"><i>✂️</i>Schnitt</button>
-  <button type="button" data-page="color"><i>🎨</i>Farbe</button>
-  <button type="button" data-page="fx"><i>⚡</i>Effekte</button>
-  <button type="button" data-page="ai"><i>✨</i>KI</button>
-  <button type="button" data-page="export"><i>📤</i>Export</button>
-</nav>
+<nav class="tabbar"></nav>
 
 <div class="exp-overlay hidden" id="exp-overlay">
   <div class="exp-box">
-    <b>🎬 Video wird erstellt …</b>
+    <b>🚀 Video wird gerendert …</b>
     <p>Bitte Bildschirm anlassen und die App nicht verlassen.</p>
     <div class="bar"><div id="exp-bar"></div></div>
     <button class="btn" id="exp-cancel" type="button">Abbrechen</button>
   </div>
 </div>
+<div class="modal hidden" id="modal"><div class="modal-box" id="modal-body"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="drop-hint">Dateien loslassen zum Importieren</div>
 <div id="media-pool" aria-hidden="true"></div>
 
 <script src="js/library.js"></script>

@@ -165,6 +165,25 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
     Overlays/Partikel), `store.js`, `ai.js`, `app.js`.
     Mögliche nächste Schritte: echte API-Anbindung Higgsfield/Kling über
     kleinen Server (Netlify Function), echte Handverfolgung (MediaPipe).
+    Update v2 (Jan: „Bedienung wie DaVinci Resolve, nicht Premiere“):
+    Seiten heißen wie in Resolve (Media/Edit/Effects/Color/Fairlight/Deliver
+    + KI). Ab 980 px Breite (Mac) Resolve-Layout: links Effects Library/
+    Media Pool/LUTs, Mitte Viewer, rechts Inspector, unten Timeline mit
+    wanderndem Playhead, Timecode HH:MM:SS:FF, Spurköpfen (Auge/Ton),
+    Werkzeugleiste (A Auswahl, B Klinge, N Einrasten, Marker). Color-Seite:
+    Nodes+Parade rechts, LUTs links, Räder+Regler unten. Handy behält mittige
+    Abspiellinie (Wischen = spulen). Resolve-Tastenkürzel in `onKey` (app.js),
+    Übersicht per ⌨️-Knopf (`KEYS`): J/K/L, I/O, M, ⌘B, ⌘T/⇧T, ⌥V, D, R, X,
+    ⇧2–⇧8 Seiten, ⌥S Node, ⌘D Node aus, ⇧D Bypass usw. ⌘T wird in normalem
+    Safari-Tab von Safari abgefangen → ⇧T als Alternative.
+    Formate: iPhone HEVC/.mov, MP4, M4V, QuickTime, HEIC (HEIC/HEVC nur in
+    Safari lesbar); erstes Video setzt Projektformat (Hochkant → 9:16).
+    Bibliothek: 77 Clip-Effekte (57 Shader in 7 Resolve-artigen Kategorien
+    + 20 Bewegungen), 38 Übergänge, 29 Partikel, 88 Sticker, 12 Titelstile,
+    7 Generatoren, 28 Looks, 20 Pakete, 26 KI-Vorlagen, Suche. Shader-
+    Effektplätze werden automatisch vergeben (4 pro vec4, wegen iPhone-
+    Uniform-Limit 64 – bei neuen Shader-Effekten Limit im Blick behalten).
+    Design hell (Standard) oder dunkel wie Resolve (⚙️).
 
 ## Wichtige Eigenheiten / nicht "reparieren"
 

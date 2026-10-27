@@ -1,7 +1,7 @@
 /* JZo Video AI – Offline-Unterstützung.
    Holt immer zuerst die neueste Version aus dem Netz; ohne Netz die gespeicherte Kopie.
    Bei Änderungen an App-Dateien CACHE hochzählen. */
-var CACHE = 'jzo-video-v1';
+var CACHE = 'jzo-video-v2';
 var FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/video.css',
   'js/library.js', 'js/store.js', 'js/render.js', 'js/ai.js', 'js/app.js', 'data/library.json',

@@ -13,38 +13,81 @@
   function has(t, words) { for (var i = 0; i < words.length; i++) if (t.indexOf(words[i]) >= 0) return true; return false; }
 
   var FX_WORDS = [
-    ['glitch', ['glitch', 'glitsch', 'stoerung']], ['rgbsplit', ['rgb', 'farbversatz', 'chromatic']],
-    ['vhs', ['vhs', 'videokassette', '80er', 'achtziger']], ['grain', ['korn', 'koernig', 'grain', 'rauschen']],
+    ['glitch', ['glitch', 'glitsch', 'stoerung']], ['rgbsplit', ['rgb', 'farbversatz']], ['chroma', ['chromatisch', 'aberration']],
+    ['vhs', ['vhs', 'videokassette', '80er', 'achtziger']], ['grain', ['korn', 'koernig', 'grain', 'filmkorn']],
     ['vignette', ['vignette', 'dunkle ecken', 'raender dunkel']], ['blur', ['unscharf', 'weichzeichn', 'blur', 'verschwomm']],
-    ['pixelate', ['pixel']], ['bw', ['schwarz weiss', 'schwarzweiss', 'schwarz-weiss', ' s/w ', 'graustufen']],
-    ['sepia', ['sepia']], ['mirror', ['spiegel']], ['invert', ['negativ', 'invert']], ['scanlines', ['scanline', 'roehrenfernseh', 'zeilen']],
-    ['posterize', ['comic', 'poster', 'cartoon']], ['lightleak', ['light leak', 'lichteinfall', 'lichtleck']],
-    ['strobe', ['strobo', 'blitzlicht', 'flacker']], ['huecycle', ['farbwechsel', 'psychedel', 'regenbogenfarben']],
-    ['thermal', ['waermebild', 'thermal', 'infrarot']], ['kaleido', ['kaleidoskop']], ['fisheye', ['fischauge', 'fisheye', 'fish eye']],
+    ['zoomblur', ['zoom-unschaerf', 'zoom unschaerf', 'zoom blur', 'zoomblur']], ['motionblur', ['bewegungsunschaerf', 'motion blur']],
+    ['spinblur', ['dreh-unschaerf', 'drehunschaerf', 'spin blur']], ['tiltshift', ['tilt shift', 'tiltshift', 'miniatur']],
+    ['vignetteblur', ['rand unschaerf', 'randunschaerf', 'raender unscharf']],
+    ['pixelate', ['verpixel', 'mosaik']], ['dither', ['8-bit', '8 bit', 'retro spiel', 'pixel art', 'pixelart', 'videospiel']],
+    ['bw', ['schwarz weiss', 'schwarzweiss', 'schwarz-weiss', ' s/w ', 'graustufen']],
+    ['sepia', ['sepia']], ['duotone', ['duoton', 'duotone', 'zweifarbig']], ['colorkeep', ['nur rot', 'sin city', 'farbe behalten']],
+    ['thermal', ['waermebild', 'thermal', 'waermekamera']], ['nightvision', ['nachtsicht', 'night vision', 'restlicht']],
+    ['infrared', ['infrarot']], ['crossproc', ['cross entwickl', 'cross-entwickl', 'cross process']],
+    ['mirror', ['spiegel']], ['mirrorv', ['spiegeln oben', 'spiegeln unten']], ['flip', ['kippen', 'umdrehen horizontal']],
+    ['grid', ['raster', '4er bild', 'vier mal']], ['invert', ['negativ', 'invert']],
+    ['scanlines', ['scanline', 'zeilen']], ['crt', ['roehrenfernseh', 'roehrenbildschirm', 'crt', 'alter fernseher']],
+    ['tvstatic', ['tv rauschen', 'tv-rauschen', 'bildrauschen', 'kein signal', 'schneegestoeber']], ['signal', ['signalverlust', 'signal weg']],
+    ['interlace', ['zeilensprung', 'interlace']], ['datamosh', ['datamosh', 'bloecke']],
+    ['posterize', ['poster', 'tontrennung']], ['edge', ['comic', 'cartoon']], ['sketch', ['skizze', 'bleistift', 'zeichnung']],
+    ['neonedge', ['neon kanten', 'neonkanten', 'tron']], ['emboss', ['relief', 'praegung']], ['halftone', ['rasterpunkte', 'raster punkte', 'zeitungsdruck', 'halftone']],
+    ['prism', ['prisma']], ['glow', ['glow', 'gluehen', 'leuchten', 'strahlen lassen']],
+    ['lightleak', ['light leak', 'lichteinfall', 'lichtleck']], ['lensflare', ['lens flare', 'flare', 'linsenreflex', 'sonnenreflex']],
+    ['lightrays', ['lichtstrahl', 'god rays', 'sonnenstrahl']],
+    ['strobe', ['strobo', 'blitzlicht']], ['flicker', ['flacker', 'flimmern']], ['huecycle', ['farbwechsel', 'psychedel', 'regenbogenfarben']],
+    ['kaleido', ['kaleidoskop']], ['fisheye', ['fischauge', 'fisheye', 'fish eye']], ['pinch', ['einzieh', 'pinch']],
+    ['swirl', ['strudel', 'wirbel']], ['ripple', ['wasserwelle', 'wassertropfen']], ['wave', ['wellen', 'wabbel']], ['heat', ['hitze', 'flimmern hitze']],
+    ['filmdamage', ['kratzer', 'filmschaden', 'staub und kratzer']], ['sharpen', ['schaerfer', 'schaerfen', 'nachschaerf']],
     ['cinebars', ['kinobalken', 'balken', 'letterbox', 'cinemascope', 'breitbild']],
     ['zoomOut', ['rauszoom', 'zoom raus', 'zoom out', 'wegzoom', 'herauszoom']],
+    ['zoomSnap', ['snap zoom', 'snapzoom', 'schneller zoom', 'zack zoom']],
     ['zoomIn', ['reinzoom', 'zoom rein', 'zoom in', 'heranzoom', 'hineinzoom', 'dynamic zoom', 'dynamischer zoom', 'ranzoom']],
-    ['punch', ['beat', 'takt', 'punch', 'zoom auf den', 'pumpen']], ['kenburns', ['ken burns', 'schwenk']],
+    ['punch', ['beat', 'takt', 'punch', 'pumpen']], ['heartbeat', ['herzschlag', 'pulsieren']], ['kenburns', ['ken burns']],
+    ['panLeft', ['schwenk nach links', 'schwenk links']], ['panRight', ['schwenk nach rechts', 'schwenk rechts', 'schwenk']],
+    ['drift', ['schwebende kamera', 'leicht bewegen', 'drift']],
     ['quake', ['erdbeben', 'beben', 'heftig wackel']], ['shake', ['wackel', 'handkamera', 'shake', 'zitter']],
-    ['wobble', ['schaukel']], ['spinIn', ['dreh rein', 'eindrehen', 'dreheffekt', 'drehen']], ['bounceIn', ['bounce', 'federn']]
+    ['wobble', ['schaukel']], ['tilt', ['schraeg', 'schief']], ['spinSlow', ['langsam drehen', 'dreht sich']],
+    ['spinIn', ['dreh rein', 'eindrehen', 'dreheffekt']], ['bounceIn', ['bounce', 'federn']],
+    ['slideInTop', ['von oben rein', 'reinfallen']], ['slideInLeft', ['von links rein', 'reinrutschen']]
   ];
   var PACK_WORDS = [['pk-musikvideo', ['musikvideo']], ['pk-retro', ['retro']], ['pk-altfilm', ['alter film', 'stummfilm', 'oldschool']],
-    ['pk-party', ['party', 'club', 'disco']], ['pk-traum', ['traum', 'vertraeumt']], ['pk-horror', ['horror', 'gruselig', 'unheimlich']],
-    ['pk-action', ['action']], ['pk-kino', ['kinolook', 'kino look', 'cinematic', 'filmisch', 'wie im kino']]];
-  var LOOK_WORDS = [['teal-orange', ['teal', 'hollywood', 'blockbuster', 'cinematic', 'kinolook']], ['vintage', ['vintage', 'nostalgisch']],
-    ['matte', ['matt']], ['bleach', ['bleach', 'entsaettigt']], ['neon', ['neon']], ['night', ['day for night', 'nachtlook', 'nacht machen']],
-    ['bw-hard', ['harter kontrast schwarz']], ['pop', ['knallig', 'bunt']]];
+    ['pk-party', ['party', 'club', 'disco']], ['pk-tiktok', ['tiktok', 'reel', 'trend']], ['pk-traum', ['traum', 'vertraeumt']],
+    ['pk-hochzeit', ['hochzeit', 'romantisch']], ['pk-flashback', ['erinnerung', 'flashback', 'rueckblende']],
+    ['pk-horror', ['horror', 'gruselig', 'unheimlich']], ['pk-action', ['action']], ['pk-trailer', ['trailer']],
+    ['pk-cctv', ['ueberwachung', 'cctv', 'security kamera']], ['pk-80er', ['80er neon', 'synthwave']], ['pk-psy', ['psychedelisch', 'drogen', 'trip']],
+    ['pk-miniatur', ['miniaturwelt', 'modellbahn']],
+    ['pk-kino', ['kinolook', 'kino look', 'cinematic', 'filmisch', 'wie im kino']]];
+  var LOOK_WORDS = [['teal-orange', ['teal', 'hollywood', 'cinematic', 'kinolook']], ['blockbuster', ['blockbuster', 'marvel']],
+    ['kodak', ['kodak', 'analog film']], ['fuji', ['fuji']], ['golden', ['golden hour', 'sonnenuntergang']], ['winter', ['winterlook']],
+    ['autumn', ['herbstlook', 'herbstlich']], ['moody', ['moody', 'duester']], ['matrix', ['matrix']], ['vintage', ['vintage', 'nostalgisch']],
+    ['seventies', ['70er', 'siebziger']], ['polaroid', ['polaroid']], ['pastel', ['pastell', 'wes anderson']], ['cyberpunk', ['cyberpunk']],
+    ['matte', ['matt']], ['bleach', ['bleach', 'entsaettigt']], ['war', ['kriegsfilm']], ['neon', ['neon']], ['night', ['day for night', 'nachtlook', 'nacht machen']],
+    ['highkey', ['high key']], ['lowkey', ['low key']], ['drama', ['dramatisch', 'drama']], ['rec709', ['log', 'apple log', 'flaches profil']],
+    ['bw-hard', ['harter kontrast schwarz']], ['pop', ['knallig', 'bunt', 'instagram']]];
   var PART_WORDS = [['handfire', ['feuer in der hand', 'feuer auf die hand', 'feuer auf der hand', 'feuerhand', 'hand brennt', 'flamme in der hand', 'flamme auf']],
-    ['fire', ['feuer', 'flamme', 'brennen', 'brennt']], ['sparks', ['funken']], ['smoke', ['rauch', 'nebel', 'qualm']],
+    ['fireworks', ['feuerwerk', 'silvester']], ['embers', ['glut', 'glutfunken']],
+    ['fire', ['feuer', 'flamme', 'brennen', 'brennt']], ['sparks', ['funken']], ['fog', ['nebel']], ['smoke', ['rauch', 'qualm']],
     ['explosion', ['explosion', 'explodier', 'boom', 'knall']], ['lightning', ['gewitter', 'blitze', 'elektrisch', 'strom']],
-    ['magic', ['magie', 'magisch', 'glitzer', 'zauber', 'sternchen']], ['aura', ['aura', 'energie']], ['hearts', ['herz', 'liebe']],
-    ['confetti', ['konfetti']], ['snow', ['schnee', 'schneien', 'winter']], ['rain', [' regen ', 'regnen', 'regnet']],
-    ['bubbles', ['seifenblase', 'blasen']], ['money', ['geld', 'money', 'dollar']], ['emojirain', ['lach', 'lustig', 'witzig']]];
+    ['magic', ['magie', 'magisch', 'glitzer', 'zauber']], ['aura', ['aura', 'energie']], ['likes', ['likes', 'daumen hoch']],
+    ['notes', ['musiknoten', 'noten']], ['butterflies', ['schmetterling']], ['balloons', ['luftballon', 'ballons']],
+    ['hearts', ['herz', 'liebe']], ['confetti', ['konfetti']], ['snow', ['schnee', 'schneien', 'winter']], ['rain', [' regen ', 'regnen', 'regnet']],
+    ['leaves', ['blaetter', 'laub']], ['petals', ['blueten', 'kirschblueten']], ['dust', ['staub im licht', 'staubkoerner']],
+    ['twinkle', ['sternenhimmel', 'sterne funkeln', 'funkeln']], ['bokeh', ['bokeh', 'lichterpunkte', 'lichtpunkte']], ['goldrain', ['goldregen', 'goldglitzer']],
+    ['matrix', ['matrix code', 'matrix-code', 'hacker']], ['bubbles', ['seifenblase', 'blasen']], ['money', ['geld', 'money', 'dollar']], ['emojirain', ['lach', 'lustig', 'witzig']]];
   var TR_WORDS = [['dipblack', ['schwarz']], ['dipwhite', ['weiss']], ['glitch', ['glitch']], ['whip', ['whip', 'reiss', 'schnell']],
-    ['zoomIn', ['zoom']], ['spin', ['dreh']], ['flash', ['blitz', 'flash']], ['circle', ['kreis']], ['wipeL', ['wisch']],
-    ['pushL', ['schieb']], ['pixel', ['pixel']], ['blur', ['unschaerf', 'blur']], ['burn', ['brand', 'burn', 'feuer']], ['fade', ['ueberblend', 'blende', 'weich', 'fade']]];
-  var GEN_WORDS = [['ai-wings', ['fluegel']], ['ai-disint', ['zerfall', 'staub', 'aufloes']], ['ai-levitate', ['schweb', 'levitat']],
-    ['ai-metal', ['metall', 'roboter']], ['ai-anime', ['anime', 'zeichentrick']], ['ai-drone', ['drohnenflug', 'drohne']],
+    ['crosszoom', ['cross zoom', 'kreuzzoom']], ['zoomIn', ['zoom']], ['spin', ['dreh']], ['flash', ['blitz', 'flash']], ['heart', ['herz']],
+    ['clock', ['uhr']], ['blinds', ['jalousie']], ['checker', ['schachbrett']], ['barnH', ['tuer']], ['irisbox', ['rechteck']], ['diamond', ['raute']],
+    ['circle', ['kreis', 'iris']], ['softwipe', ['weiches wisch']], ['wipeL', ['wisch']], ['pushUp', ['hoch schieb', 'nach oben']], ['pushL', ['schieb']],
+    ['pixel', ['pixel']], ['blur', ['unschaerf', 'blur']], ['burn', ['brand', 'burn', 'feuer']], ['leak', ['light leak', 'lichtblende']],
+    ['ripple', ['welle', 'wasser']], ['swirl', ['strudel']], ['morph', ['morph', 'smooth cut']], ['additive', ['additiv']],
+    ['fade', ['ueberblend', 'blende', 'weich', 'fade', 'dissolve']]];
+  var GEN_WORDS = [['ai-firewings', ['feuerfluegel', 'phoenix']], ['ai-wings', ['fluegel']], ['ai-disint', ['zerfall', 'zu staub', 'aufloes']],
+    ['ai-levitate', ['levitat', 'person schwebt', 'schweben lassen']], ['ai-fireball', ['feuerball']],
+    ['ai-metal', ['metall', 'roboter']], ['ai-ice', ['einfrieren', 'zu eis']], ['ai-glass', ['zerbricht', 'wie glas']], ['ai-portal', ['portal']],
+    ['ai-invisible', ['unsichtbar']], ['ai-clone', ['klonen', 'klone']], ['ai-hologram', ['hologramm']],
+    ['ai-anime', ['anime', 'zeichentrick']], ['ai-comic', ['comic-stil', 'comicstil']], ['ai-daynight', ['tag zu nacht']], ['ai-weather', ['echter regen', 'echtes gewitter']],
+    ['ai-bg', ['hintergrund austauschen', 'hintergrund ersetzen', 'anderer hintergrund']], ['ai-drone', ['drohnenflug', 'drohne']],
+    ['ai-dolly', ['dolly zoom', 'vertigo']], ['ai-orbit', ['kreist', 'orbit', '360']], ['ai-stage', ['buehne', 'konzert']],
     ['ai-animate', ['foto lebendig', 'zum leben', 'animier']], ['ai-thunder', ['superheld', 'blitzkraft', 'blitz kraft']],
     ['ai-guitar', ['gitarre brennt', 'gitarre in flammen', 'brennende gitarre']]];
 
@@ -100,6 +143,7 @@
     FX_WORDS.forEach(function (row) {
       if (has(t, row[1])) {
         if (row[0] === 'strobe' && has(t, ['gewitter'])) return;
+        if (row[0] === 'edge' && has(t, ['comic-stil', 'comicstil'])) return;
         targets.forEach(function (c) { api.addFx(c, row[0], amount); });
         done.push(LIB.fxById(row[0]).name);
       }
