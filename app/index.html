@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>JZo Jam Studio</title>
+<meta name="description" content="Aufnehmen, Tonart und Akkorde erkennen, Skalen als Tabulatur – das persönliche Musik-Notizbuch von JZo Entertainment.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/icon-192.png" type="image/png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="JZo Jam">
+<meta name="theme-color" content="#000000">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<header class="top">
+  <img src="../assets/img/logo-transparent.png" alt="JZo Entertainment" class="top-logo">
+  <div class="top-title">Jam Studio</div>
+  <button class="key-chip" id="key-chip" type="button" title="Aktuelle Tonart"></button>
+  <button class="icon-btn" id="settings-btn" type="button" aria-label="Einstellungen">
+    <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7zm7.43-2.53a7.8 7.8 0 0 0 0-1.94l2.11-1.65a.5.5 0 0 0 .12-.64l-2-3.46a.5.5 0 0 0-.61-.22l-2.49 1a7.3 7.3 0 0 0-1.68-.98l-.38-2.65A.5.5 0 0 0 14 2h-4a.5.5 0 0 0-.5.42l-.38 2.65c-.6.25-1.17.58-1.68.98l-2.49-1a.5.5 0 0 0-.61.22l-2 3.46a.5.5 0 0 0 .12.64l2.11 1.65a7.8 7.8 0 0 0 0 1.94l-2.11 1.65a.5.5 0 0 0-.12.64l2 3.46c.13.22.39.31.61.22l2.49-1c.51.4 1.08.73 1.68.98l.38 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.38-2.65c.6-.25 1.17-.58 1.68-.98l2.49 1c.22.09.48 0 .61-.22l2-3.46a.5.5 0 0 0-.12-.64l-2.11-1.65z"/></svg>
+  </button>
+</header>
+
+<main id="main">
+
+  <!-- ============ AUFNAHME ============ -->
+  <section class="view active" id="view-record">
+    <div class="rec-stage">
+      <button class="mic-btn" id="mic-btn" type="button" aria-label="Aufnahme starten">
+        <svg class="ico-mic" viewBox="0 0 24 24"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>
+        <span class="ico-stop"></span>
+      </button>
+      <div class="rec-time" id="rec-time">00:00</div>
+      <div class="meter"><div class="meter-fill" id="rec-meter"></div></div>
+      <p class="rec-hint" id="rec-hint">Tippe auf den Knopf und spiel los.<br>Jede Aufnahme wird <b>automatisch gespeichert</b>.</p>
+      <div class="live-row hidden" id="rec-live">
+        <div><span class="lbl">Tonart (vorläufig)</span><b id="rec-live-key">…</b></div>
+        <div><span class="lbl">Akkord</span><b id="rec-live-chord">–</b></div>
+        <div><span class="lbl">Ton</span><b id="rec-live-note">–</b></div>
+      </div>
+    </div>
+    <div id="rec-result"></div>
+    <div class="card subtle">
+      <h3>Song oder Jamtrack als Datei?</h3>
+      <p class="muted">Du kannst auch eine Audio-Datei (z. B. aus „Dateien“) analysieren lassen.</p>
+      <label class="btn ghost file-btn">Datei auswählen
+        <input type="file" id="file-input" accept="audio/*,.mp3,.m4a,.wav,.aac,.aiff">
+      </label>
+    </div>
+  </section>
+
+  <!-- ============ JAM (LIVE) ============ -->
+  <section class="view" id="view-jam">
+    <div class="card">
+      <h2>Live-Erkennung</h2>
+      <p class="muted">Lass einen Jamtrack laufen (z. B. über Lautsprecher) oder spiel selbst. Die App hört zu und zeigt dir laufend Tonart und Modus.</p>
+      <button class="btn big" id="jam-btn" type="button">▶ Zuhören starten</button>
+      <div class="meter"><div class="meter-fill" id="jam-meter"></div></div>
+    </div>
+    <div class="card jam-display">
+      <span class="lbl">Tonart / Modus</span>
+      <div class="jam-key" id="jam-key">–</div>
+      <div class="conf"><div class="conf-fill" id="jam-conf"></div></div>
+      <div class="jam-sub" id="jam-info"></div>
+      <div class="jam-grid">
+        <div><span class="lbl">Akkord</span><b id="jam-chord">–</b></div>
+        <div><span class="lbl">Ton</span><b id="jam-note">–</b></div>
+      </div>
+      <div class="jam-alt" id="jam-alt"></div>
+      <div class="btn-row">
+        <button class="btn" id="jam-use" type="button" disabled>Skala dazu zeigen</button>
+        <button class="btn ghost" id="jam-reset" type="button">Neu starten</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Verlauf</h3>
+      <p class="muted small">Jede erkannte Tonart, sobald sie ein paar Sekunden stabil ist.</p>
+      <ol class="history" id="jam-history"><li class="muted">Noch nichts erkannt.</li></ol>
+      <button class="btn ghost" id="jam-save" type="button" disabled>Verlauf als Idee speichern</button>
+    </div>
+  </section>
+
+  <!-- ============ SKALEN ============ -->
+  <section class="view" id="view-scales">
+    <div class="card">
+      <div class="key-select" data-scope="scales"></div>
+      <p class="scale-info" id="scale-info"></p>
+      <div class="scale-notes" id="scale-notes"></div>
+    </div>
+    <div class="card">
+      <h3>Griffbrett</h3>
+      <div class="fretboard-wrap"><div id="fretboard"></div></div>
+      <p class="muted small">Orange = Grundton. Hervorgehoben = gewählte Lage.</p>
+    </div>
+    <div class="card">
+      <h3>Lagen &amp; Tabulatur</h3>
+      <div class="chips" id="positions"></div>
+      <pre class="tab" id="scale-tab"></pre>
+      <button class="btn" id="scale-play" type="button">▶ Lage anhören</button>
+    </div>
+  </section>
+
+  <!-- ============ AKKORDE ============ -->
+  <section class="view" id="view-chords">
+    <div class="card">
+      <div class="key-select" data-scope="chords"></div>
+      <div class="seg" id="chord-type">
+        <button type="button" data-v="triad" class="on">Dreiklänge</button>
+        <button type="button" data-v="seventh">Vierklänge</button>
+      </div>
+      <p class="muted small" id="chords-from"></p>
+      <div class="chord-grid" id="diatonic"></div>
+      <p class="muted small">Tippen = anhören · ＋ = zu deiner Progression</p>
+    </div>
+    <div class="card">
+      <h3>Meine Progression</h3>
+      <div class="chips prog-build" id="my-prog"></div>
+      <div class="tempo-row">
+        <label for="prog-bpm">Tempo</label>
+        <input type="range" id="prog-bpm" min="50" max="180" step="1" value="90">
+        <span id="prog-bpm-val">90 BPM</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="prog-play" type="button">▶ Abspielen</button>
+        <button class="btn ghost" id="prog-clear" type="button">Leeren</button>
+        <button class="btn ghost" id="prog-save" type="button">💾 Speichern</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Passende Progressionen</h3>
+      <div id="suggestions"></div>
+    </div>
+  </section>
+
+  <!-- ============ IDEEN ============ -->
+  <section class="view" id="view-ideas">
+    <h2 class="view-title">Meine Ideen</h2>
+    <div id="ideas-list"></div>
+    <p class="muted small center" id="storage-info"></p>
+  </section>
+
+</main>
+
+<!-- Detail-Ansicht einer Idee -->
+<div class="sheet hidden" id="idea-sheet">
+  <div class="sheet-head">
+    <button class="btn ghost small-btn" id="idea-back" type="button">‹ Zurück</button>
+  </div>
+  <div class="sheet-body" id="idea-body"></div>
+</div>
+
+<!-- Einstellungen -->
+<div class="sheet hidden" id="settings-sheet">
+  <div class="sheet-head">
+    <button class="btn ghost small-btn" id="settings-back" type="button">‹ Zurück</button>
+  </div>
+  <div class="sheet-body">
+    <div class="card">
+      <h3>Notennamen</h3>
+      <div class="seg" id="naming">
+        <button type="button" data-v="intl">B (international)</button>
+        <button type="button" data-v="de">H (deutsch)</button>
+      </div>
+      <p class="muted small">Deutsch: H statt B, und B statt Bb.</p>
+    </div>
+    <div class="card">
+      <h3>Aufs iPhone holen</h3>
+      <ol class="steps">
+        <li>Diese Seite in <b>Safari</b> öffnen.</li>
+        <li>Unten auf das <b>Teilen-Symbol</b> (Quadrat mit Pfeil) tippen.</li>
+        <li><b>„Zum Home-Bildschirm“</b> wählen → <b>Hinzufügen</b>.</li>
+      </ol>
+      <p class="muted small">Wichtig: Nutze die App vom Home-Bildschirm aus. Nur dann bleiben deine Ideen sicher dauerhaft gespeichert.</p>
+    </div>
+    <div class="card">
+      <h3>Gut zu wissen</h3>
+      <ul class="steps">
+        <li>Deine Aufnahmen bleiben <b>nur auf diesem Gerät</b>. Wichtige Ideen über „Teilen“ zusätzlich sichern (z. B. in Dateien oder per Mail an dich).</li>
+        <li>Während der Aufnahme die App nicht verlassen – sonst stoppt iOS das Mikrofon.</li>
+        <li>Die Erkennung ist eine sehr gute Schätzung, aber keine Garantie. Wenn etwas nicht stimmt: einfach Tonart/Tempo von Hand korrigieren.</li>
+      </ul>
+      <p class="muted small" id="version-info"></p>
+    </div>
+  </div>
+</div>
+
+<nav class="tabbar" id="tabbar">
+  <button type="button" data-view="record" class="on"><span class="t-ico">🎙️</span>Aufnahme</button>
+  <button type="button" data-view="jam"><span class="t-ico">📡</span>Jam</button>
+  <button type="button" data-view="scales"><span class="t-ico">🎼</span>Skalen</button>
+  <button type="button" data-view="chords"><span class="t-ico">🎸</span>Akkorde</button>
+  <button type="button" data-view="ideas"><span class="t-ico">💾</span>Ideen</button>
+</nav>
+
+<div class="toast hidden" id="toast"></div>
+
+<script src="js/theory.js"></script>
+<script src="js/dsp.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

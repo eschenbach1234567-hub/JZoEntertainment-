@@ -1,0 +1,15 @@
+{
+  "name": "JZo Jam Studio",
+  "short_name": "JZo Jam",
+  "description": "Aufnehmen, Tonart und Akkorde erkennen, Skalen als Tabulatur.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

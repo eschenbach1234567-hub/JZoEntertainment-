@@ -100,6 +100,27 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
     Felder verschiedener Seiten gegenseitig, je nachdem welcher fetch
     zuerst fertig ist (ist beim Bau dieses Punkts passiert, gefixt).
 
+14. **JZo Jam Studio** (`app/`) – Jans persönliche Musik-App (er spielt
+    Gitarre), Link: https://eschenbach1234567-hub.github.io/JZoEntertainment-/app/
+    Eigenständige PWA (eigenes Manifest/Icon/Service-Worker, nicht auf der
+    Website verlinkt, `noindex`). Kein App Store, keine Server-Kosten – alles
+    läuft im iPhone-Browser. Funktionen: Aufnahme per Mikrofon (wird SOFORT
+    automatisch gespeichert, damit keine Idee verloren geht – das war Jans
+    Kernproblem), Analyse von Tonart + Modus (alle 7 Kirchentonarten),
+    Tempo/BPM, Taktart (Vermutung 3/4 vs 4/4), Akkordfolge und Einzeltönen
+    (Melodie als Tab); Live-"Jam"-Modus (hört Jamtrack mit, zeigt Tonart
+    laufend + Verlauf); Skalen als Griffbrett + Tabulatur in Lagen (3 bzw.
+    2 Töne pro Saite); leitereigene Akkorde mit Griffbildern, Progressions-
+    Vorschläge, eigene Progression bauen/abspielen (Karplus-Strong-
+    Gitarrensound); Ideen-Bibliothek in IndexedDB (nur auf dem Gerät!) mit
+    Teilen/Export als WAV + Text. Einstellung Notennamen B/H.
+    Code: `app/js/theory.js` (Musiktheorie), `app/js/dsp.js` (Analyse,
+    reines JS, läuft im Web Worker), `app/js/app.js` (Oberfläche),
+    `app/js/storage.js`. Erkennung ist heuristisch (Chroma + Vorlagen;
+    Grundton über Bass + Startakkord) – mit synthetischen Gitarren-
+    Aufnahmen getestet, mit echtem Instrument noch nicht. Bei Änderungen
+    an App-Dateien `CACHE`-Version in `app/sw.js` hochzählen.
+
 ## Wichtige Eigenheiten / nicht "reparieren"
 
 - **E-Mail-Adresse `jzoentertainmet@outlook.com`** – der Tippfehler
