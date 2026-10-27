@@ -265,7 +265,7 @@ pre.tab {
 }
 .tabbar button {
   flex: 1; height: var(--tabbar-h); border: 0; background: none; color: var(--muted);
-  font-size: .68rem; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  font-size: .62rem; font-family: inherit; display: flex; min-width: 0; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
 }
 .tabbar .t-ico { font-size: 1.35rem; filter: grayscale(1) opacity(.7); }
 .tabbar button.on { color: var(--gold-1); }
@@ -277,4 +277,48 @@ pre.tab {
   background: #262626; color: var(--text); border: 1px solid var(--border);
   padding: 10px 16px; border-radius: 12px; font-size: .92rem; max-width: 90vw; text-align: center;
   box-shadow: 0 8px 30px rgba(0, 0, 0, .5);
+}
+
+/* ---------- Stimmung ---------- */
+.tuning-select { margin-bottom: 10px; }
+.tuning-select select {
+  width: 100%; background: var(--bg-soft); color: var(--text); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px; font-size: .95rem; font-family: inherit; -webkit-appearance: none; appearance: none;
+}
+
+/* ---------- Tonarten-Übersicht & Blatt ---------- */
+.mode-chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px -16px; padding: 0 16px 4px; }
+.mode-chips .chip { flex: 0 0 auto; }
+.keys-list { display: grid; grid-template-columns: 1fr; gap: 6px; }
+.keys-group { margin: 12px 0 4px; font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.key-row {
+  display: flex; align-items: baseline; gap: 10px; width: 100%; text-align: left;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px;
+  padding: 9px 12px; color: var(--text); font-family: inherit; font-size: .95rem;
+}
+.key-row b { min-width: 118px; color: var(--gold-1); }
+.key-row span { color: var(--muted); font-size: .85rem; letter-spacing: .02em; }
+.key-row.on { border-color: var(--gold-1); background: rgba(255, 179, 92, .1); }
+.sheet-title { font-size: 2rem; font-weight: 800; color: var(--gold-1); line-height: 1.1; }
+.pos-block { margin-top: 14px; }
+.pos-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.pos-head b { font-size: .95rem; }
+.sheet-sub { margin: 14px 0 6px; font-size: .8rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+
+/* ---------- Drucken / PDF (nur das Blatt) ---------- */
+@media print {
+  @page { margin: 12mm; }
+  html, body { background: #fff !important; color: #000 !important; }
+  .top, .tabbar, .toast, .sheet, .no-print, .view:not(#view-keys) { display: none !important; }
+  #view-keys { display: block !important; animation: none; }
+  main { padding: 0; max-width: none; }
+  .card { background: #fff !important; border: 1px solid #bbb; }
+  .muted, .sheet-sub, .sugg-roman, .chord-card .roman { color: #555 !important; }
+  .sheet-title, .sugg-chords, .chord-card .name, .scale-notes span.root b { color: #c0490a !important; }
+  .scale-notes span, .chord-card { background: #fff !important; border-color: #bbb !important; color: #000 !important; }
+  pre.tab { background: #fff !important; color: #000 !important; border-color: #bbb; white-space: pre; overflow: visible; font-size: 9pt; }
+  .pos-block { break-inside: avoid; page-break-inside: avoid; }
+  .fretboard-wrap { overflow: visible; }
+  svg.fretboard { width: 100%; height: auto; }
+  svg { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }

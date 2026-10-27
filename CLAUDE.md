@@ -120,6 +120,17 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
     Grundton über Bass + Startakkord) – mit synthetischen Gitarren-
     Aufnahmen getestet, mit echtem Instrument noch nicht. Bei Änderungen
     an App-Dateien `CACHE`-Version in `app/sw.js` hochzählen.
+    Erweiterung (v1.1): 30 Gitarrenstimmungen (`TUNINGS` in theory.js:
+    Standard E/Eb/D/C#/C/B, 7-Saiter Standard/Drop A/A-Standard, Drop D/C#/
+    C/B, Double Drop D, Open D/E/G/A/C/F/B, Open Dm/Em/Gm/Am/Cm, DADGAD,
+    Open Csus2, Open C6, Open G6) – Auswahl gilt global (Skalen, Akkorde,
+    Tonarten, Einstellungen); Aufnahmen merken sich ihre Stimmung für den
+    Melodie-Tab. Standard-artige Stimmungen nutzen bekannte Griffe
+    (verschoben, 7. Saite stumm), alle anderen einen automatischen
+    Griff-Finder (`searchVoicing`). Neuer Reiter "Tonarten": Übersicht
+    aller 12 Grundtöne × alle Modi/Skalen, Antippen → komplettes Blatt
+    (Griffbrett, alle Lagen als Tab, Drei-/Vierklänge mit Griffbildern,
+    Progressionen) inkl. "Als PDF / Drucken" (Print-CSS) und Text-Teilen.
 
 ## Wichtige Eigenheiten / nicht "reparieren"
 

@@ -86,9 +86,22 @@
     </div>
   </section>
 
+  <!-- ============ TONARTEN (Übersicht + komplettes Blatt) ============ -->
+  <section class="view" id="view-keys">
+    <div class="card no-print">
+      <h2>Alle Tonarten &amp; Modi</h2>
+      <p class="muted small">Modus wählen, dann eine Tonart antippen. Darunter erscheint das komplette Blatt: Tonleiter in allen Lagen, Akkorde mit Griffbildern und passende Chord Progressions.</p>
+      <div class="tuning-select" data-scope="global"></div>
+      <div class="chips mode-chips" id="keys-modes"></div>
+      <div class="keys-list" id="keys-list"></div>
+    </div>
+    <div id="sheet"></div>
+  </section>
+
   <!-- ============ SKALEN ============ -->
   <section class="view" id="view-scales">
     <div class="card">
+      <div class="tuning-select" data-scope="global"></div>
       <div class="key-select" data-scope="scales"></div>
       <p class="scale-info" id="scale-info"></p>
       <div class="scale-notes" id="scale-notes"></div>
@@ -109,6 +122,7 @@
   <!-- ============ AKKORDE ============ -->
   <section class="view" id="view-chords">
     <div class="card">
+      <div class="tuning-select" data-scope="global"></div>
       <div class="key-select" data-scope="chords"></div>
       <div class="seg" id="chord-type">
         <button type="button" data-v="triad" class="on">Dreiklänge</button>
@@ -170,6 +184,11 @@
       <p class="muted small">Deutsch: H statt B, und B statt Bb.</p>
     </div>
     <div class="card">
+      <h3>Stimmung der Gitarre</h3>
+      <div class="tuning-select" data-scope="global"></div>
+      <p class="muted small">Gilt für Griffbrett, Tabs und Griffbilder überall in der App.</p>
+    </div>
+    <div class="card">
       <h3>Aufs iPhone holen</h3>
       <ol class="steps">
         <li>Diese Seite in <b>Safari</b> öffnen.</li>
@@ -193,6 +212,7 @@
 <nav class="tabbar" id="tabbar">
   <button type="button" data-view="record" class="on"><span class="t-ico">🎙️</span>Aufnahme</button>
   <button type="button" data-view="jam"><span class="t-ico">📡</span>Jam</button>
+  <button type="button" data-view="keys"><span class="t-ico">📖</span>Tonarten</button>
   <button type="button" data-view="scales"><span class="t-ico">🎼</span>Skalen</button>
   <button type="button" data-view="chords"><span class="t-ico">🎸</span>Akkorde</button>
   <button type="button" data-view="ideas"><span class="t-ico">💾</span>Ideen</button>

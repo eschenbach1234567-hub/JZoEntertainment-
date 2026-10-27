@@ -1,7 +1,7 @@
 /* JZo Jam Studio – Offline-Unterstützung.
    Holt immer zuerst die neueste Version aus dem Netz; nur wenn kein Netz
    da ist (z. B. im Proberaum), wird die gespeicherte Kopie verwendet. */
-var CACHE = 'jzo-jam-v1';
+var CACHE = 'jzo-jam-v2';
 var FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/theory.js', 'js/dsp.js', 'js/storage.js', 'js/app.js',
