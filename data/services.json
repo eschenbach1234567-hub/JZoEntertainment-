@@ -1,11 +1,10 @@
 {
-  "eyebrow": "Dienstleistungen",
-  "heading": "Das biete ich an",
-  "intro": "Alle Leistungen im Überblick – sprechen Sie mich einfach für ein individuelles Angebot an.",
-  "pricesEyebrow": "Preise",
-  "pricesHeading": "Preisübersicht",
   "pricesIntro": "Alle Preise sind Richtwerte und können je nach Aufwand variieren – gerne erstelle ich Ihnen ein individuelles Angebot.",
+  "heading": "Das biete ich an",
+  "eyebrow": "Dienstleistungen",
+  "intro": "Alle Leistungen im Überblick – sprechen Sie mich einfach für ein individuelles Angebot an.",
   "ctaHeading": "Gerne mache ich Ihnen ein Angebot!",
+  "pricesHeading": "Preisübersicht",
   "ctaText": "Schreiben Sie mir einfach kurz, worum es geht.",
   "services": [
     {
@@ -33,10 +32,11 @@
       "badge": "10–15 € pro Kassette"
     },
     {
-      "title": "Contentberatung",
-      "description": "Contentberatung für kleine und mittelständige Betriebe – rund um Foto- und Video-Content.",
+      "title": "Contentberatung Mit KI",
+      "description": "Contentberatung für kleine und mittelständige Betriebe – rund um Foto- und Video-Content.\nIch helfe Ihnen dabei aus Ihrem Unternehmen mit KI das beste herauszuholen. Damit Ihr Social Media für Ihr Unternehmen Erfolg bringt.\n\nIch zeige Ihnen außerdem wie SIe selbst die Vorhandenen KI Tools nutzen und wie Sie Ihre \"KI angs\" ablegen können um mit KI das Beste aus Ihrem Unternehmen herausholen können.\n",
       "icon": "beratung",
-      "badge": ""
+      "badge": "Preis hierfür je nach Aufwand"
     }
-  ]
+  ],
+  "pricesEyebrow": "Preise"
 }
