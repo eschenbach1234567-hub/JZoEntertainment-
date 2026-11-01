@@ -221,6 +221,35 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
     `ai.js`, `store.js`, `app.js`. Bei Änderungen `CACHE` in `kamera/sw.js`
     hochzählen (KI-Dateien haben eigenen Cache `AI_CACHE`).
 
+17. **JZo World** (`game/`) – Jans Open-World-Spiel ("wie GTA, aber freies
+    Fahren/Fliegen, kaum Missionen"), Link:
+    https://eschenbach1234567-hub.github.io/JZoEntertainment-/game/
+    Eigenständige PWA wie Jam-/Video-App (eigenes Manifest/Icon/SW, `noindex`,
+    nicht verlinkt). WICHTIG rechtlich: GTA-Städte/Namen (Vice City, Liberty
+    City, San Andreas …) dürfen NICHT nachgebaut werden – Jan wurde das erklärt,
+    stattdessen 4 eigene Welten im gleichen Stil: Neon Bay (80er/Miami-Gefühl),
+    Steel Harbor (Wolkenkratzer-Insel/NY-Gefühl, Hängebrücken), Sierra Sol
+    (Küste+Wüste+Berge/Kalifornien, Militärbasis), Alpenhorn (Alpental mit
+    Fliegerhorst). Autos haben erfundene Namen (Vortex Furia, Bolide W16,
+    Mammut H1 Militär = Humvee-Stil usw.), Flugzeuge heißen nach Typ (F-14,
+    F/A-18, F-16, C-130, MiG-21; zivil umbenannt: "Privatflieger 182",
+    "Business-Jet CX", "Langstrecken-Jet G-V"). Jans Spielfigur ist aus seinem
+    Foto nachgebaut (dunkle kurze Haare, eckige Brille, Schnurrbart+Kinnbart,
+    grauer Zip-Hoodie mit weißen Kordeln) – stilisiert 3D, Foto nur als
+    Profilbild im HUD (`game/img/jan-avatar.jpg`, auch App-Icon).
+    Technik: Three.js r170 lokal in `game/js/vendor/` (kein CDN), Import-Map.
+    `world.js` (Gelände-Raster = zugleich Kollision, Städte prozedural,
+    Gebäude als InstancedMesh mit Fenster-Shader, Flughäfen, Brücken, Bäume,
+    Verkehr), `vehicles.js` (Fahrzeugliste + Auto-/Flugphysik), `models.js`
+    (Figur/Autos/Flugzeuge aus Grundformen), `env.js` (Himmel, Tageszeit,
+    Wasser-Shader), `fx.js` (Partikel, Spuren, synthetischer Ton), `input.js`
+    (frei belegbare Tasten, 2 Plätze je Aktion, Touch, Gamecontroller),
+    `main.js` (Menüs/Kamera/HUD). Grafikstufen Ultra/Hoch/Mittel/Niedrig
+    (Auto: Mac=Hoch, iPhone=Mittel). Fahrzeuge kann man in jede Stadt
+    mitnehmen ("Stadt wechseln" → Flugzeug startet im Landeanflug).
+    Ehrlich kommuniziert: Grafik ist gut für Browser, aber nicht GTA-5/6-Niveau.
+    Bei Änderungen `CACHE` in `game/sw.js` hochzählen.
+
 ## Wichtige Eigenheiten / nicht "reparieren"
 
 - **E-Mail-Adresse `jzoentertainmet@outlook.com`** – der Tippfehler

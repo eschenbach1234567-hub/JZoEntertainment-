@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>JZo World</title>
+<meta name="description" content="JZo World – Jans persönliches Open-World-Spiel: Autos fahren, Jets fliegen, vier Städte.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/icon-192.png" type="image/png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="JZo World">
+<meta name="theme-color" content="#0b0f17">
+<link rel="stylesheet" href="css/game.css">
+<script type="importmap">{ "imports": { "three": "./js/vendor/three.module.min.js", "three/addons/": "./js/vendor/" } }</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<!-- Anzeige im Spiel -->
+<div id="hud" hidden>
+  <div class="who">
+    <img src="img/jan-avatar.jpg" alt="">
+    <div><b id="h-name">Jan</b><span id="h-world"></span></div>
+    <span class="clock" id="h-time"></span>
+  </div>
+  <div class="topbtns">
+    <button type="button" data-tap="garage" title="Fahrzeug holen (V)">🚘</button>
+    <button type="button" data-tap="camera" title="Kamera (C)">🎥</button>
+    <button type="button" data-tap="map" title="Karte (M)">🗺️</button>
+    <button type="button" data-tap="menu" title="Pause (Esc)">⏸</button>
+  </div>
+  <canvas id="mini" width="360" height="360"></canvas>
+  <div id="gauge">
+    <div class="g-name" id="g-name"></div>
+    <div class="g-speed"><span id="g-spd">0</span><small id="g-unit">km/h</small></div>
+    <div class="g-rows" id="g-rows"></div>
+    <div class="g-bar" id="g-bar"><i></i></div>
+  </div>
+  <div id="prompt"></div>
+  <div id="warn"></div>
+  <div id="toast"></div>
+</div>
+
+<div id="touch" hidden>
+  <div class="stick"><div class="knob"></div></div>
+  <div class="tbtns"></div>
+</div>
+
+<!-- Bildschirme -->
+<section class="screen" id="s-title">
+  <div class="title-card">
+    <img class="avatar" src="img/jan-avatar.jpg" alt="Jan">
+    <h1>JZo <span>World</span></h1>
+    <p class="sub">Dein Open-World-Spiel. Freies Fahren, freies Fliegen, vier Städte.</p>
+    <button class="big" id="b-play" type="button">▶ Spielen</button>
+    <div class="row">
+      <button id="b-keys" type="button">⌨️ Steuerung</button>
+      <button id="b-set" type="button">⚙️ Einstellungen</button>
+      <button id="b-help" type="button">❓ Hilfe</button>
+    </div>
+    <p class="fine">Mac: Tastatur oder Gamecontroller · iPhone: Touch-Steuerung</p>
+  </div>
+</section>
+
+<section class="screen" id="s-worlds">
+  <div class="panel wide">
+    <header><button class="back" data-back type="button">‹ Zurück</button><h2>Wohin geht's?</h2></header>
+    <div class="worlds" id="world-list"></div>
+    <label class="check" id="take-wrap" hidden><input type="checkbox" id="take-veh" checked> <span id="take-label">Aktuelles Fahrzeug mitnehmen</span></label>
+  </div>
+</section>
+
+<section class="screen" id="s-start">
+  <div class="panel wide">
+    <header><button class="back" data-back type="button">‹ Zurück</button><h2 id="start-title">Wie willst du starten?</h2></header>
+    <div class="opts">
+      <label>Tageszeit
+        <select id="start-time">
+          <option value="world">Passend zur Stadt</option>
+          <option value="7">Morgen (7 Uhr)</option>
+          <option value="13">Mittag (13 Uhr)</option>
+          <option value="18.6">Sonnenuntergang</option>
+          <option value="22.5">Nacht</option>
+        </select>
+      </label>
+    </div>
+    <div class="vgrid" id="start-list"></div>
+  </div>
+</section>
+
+<section class="screen" id="s-pause">
+  <div class="panel">
+    <h2>Pause</h2>
+    <div class="menu">
+      <button class="big" data-act="resume" type="button">▶ Weiterspielen</button>
+      <button data-act="garage" type="button">🚘 Fahrzeug holen</button>
+      <button data-act="worlds" type="button">🌆 Stadt wechseln</button>
+      <button data-act="map" type="button">🗺️ Karte / Schnellreise</button>
+      <label class="slider">🕒 Tageszeit <input type="range" id="p-time" min="0" max="24" step="0.1"><span id="p-time-v"></span></label>
+      <button data-act="settings" type="button">⚙️ Einstellungen</button>
+      <button data-act="keys" type="button">⌨️ Steuerung / Tasten</button>
+      <button data-act="help" type="button">❓ Hilfe</button>
+      <button data-act="title" type="button">🏠 Hauptmenü</button>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="s-garage">
+  <div class="panel wide">
+    <header><button class="back" data-back type="button">‹ Zurück</button><h2>Fahrzeug holen</h2></header>
+    <p class="hint">Antippen und auswählen, wo das Fahrzeug hin soll. Du sitzt dann sofort drin.</p>
+    <div class="vgrid" id="garage-list"></div>
+  </div>
+</section>
+
+<section class="screen" id="s-settings">
+  <div class="panel">
+    <header><button class="back" data-back type="button">‹ Zurück</button><h2>Einstellungen</h2></header>
+    <div class="form">
+      <label>Dein Name <input id="o-name" maxlength="20"></label>
+      <label>Grafik
+        <select id="o-quality">
+          <option value="auto">Automatisch (empfohlen)</option>
+          <option value="ultra">Ultra (nur starker Mac)</option>
+          <option value="hoch">Hoch</option>
+          <option value="mittel">Mittel</option>
+          <option value="niedrig">Niedrig (wenn es ruckelt)</option>
+        </select>
+      </label>
+      <p class="hint" id="o-qnote" hidden>Neue Grafikstufe gilt nach dem Neustart. <button type="button" id="o-reload">Jetzt neu starten</button></p>
+      <label class="check"><input type="checkbox" id="o-cycle"> Tageszeit läuft weiter (ein Tag = 24 Minuten)</label>
+      <label class="check"><input type="checkbox" id="o-assist"> Flughilfe (Flugzeug richtet sich gerade aus, wenn du loslässt)</label>
+      <label class="check"><input type="checkbox" id="o-invert"> Nase hoch/runter umkehren</label>
+      <label class="check"><input type="checkbox" id="o-knots"> Flugzeug-Tempo in Knoten statt km/h</label>
+      <label class="check"><input type="checkbox" id="o-sound"> Ton an</label>
+      <label class="slider">Lautstärke <input type="range" id="o-vol" min="0" max="1" step="0.05"></label>
+      <label class="check"><input type="checkbox" id="o-touch"> Touch-Knöpfe immer zeigen</label>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="s-keys">
+  <div class="panel wide">
+    <header><button class="back" data-back type="button">‹ Zurück</button><h2>Steuerung &amp; Tasten</h2></header>
+    <p class="hint">Auf ein Tasten-Feld klicken und dann die neue Taste drücken. Jede Aktion hat zwei Plätze, z. B. W und Pfeil hoch.</p>
+    <div id="keys-list"></div>
+    <div class="row"><button type="button" id="k-reset">Alles auf Standard zurücksetzen</button></div>
+  </div>
+</section>
+
+<section class="screen" id="s-help">
+  <div class="panel wide">
+    <header><button class="back" data-back type="button">‹ Zurück</button><h2>So spielst du</h2></header>
+    <div class="help" id="help-body"></div>
+  </div>
+</section>
+
+<section class="screen" id="s-map">
+  <div class="panel wide mapp">
+    <header><button class="back" data-back type="button">‹ Zurück</button><h2>Karte</h2></header>
+    <p class="hint">Auf die Karte tippen = Schnellreise dorthin.</p>
+    <canvas id="bigmap" width="1024" height="1024"></canvas>
+  </div>
+</section>
+
+<section class="screen" id="s-loading">
+  <div class="loading"><div class="spin"></div><p id="load-text">Welt wird gebaut…</p></div>
+</section>
+
+<div id="choice" hidden><div class="panel"><h3 id="ch-title"></h3><div class="menu" id="ch-btns"></div></div></div>
+<div id="keycap" hidden><div class="panel"><h3>Neue Taste drücken…</h3><p id="kc-for"></p><div class="row"><button type="button" id="kc-clear">Feld leeren</button><button type="button" id="kc-cancel">Abbrechen</button></div></div></div>
+<noscript>Bitte JavaScript aktivieren.</noscript>
+
+<script type="module" src="js/main.js"></script>
+<script>
+  if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+</script>
+</body>
+</html>
