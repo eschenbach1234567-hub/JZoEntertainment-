@@ -34,7 +34,7 @@ JPEG encoder ported to JavaScript and optimized by Andreas Ritter, www.bytestrom
 
 Basic GUI blocking jpeg encoder
 */
-/* Angepasst für JZo M: Ausgabe in Byte-Blöcken, zeilenweise Verarbeitung (wenig Speicher,
+/* Angepasst für M1993: Ausgabe in Byte-Blöcken, zeilenweise Verarbeitung (wenig Speicher,
    auch für Bilder über der Canvas-Grenze des iPhones), 4:2:0-Unterabtastung, EXIF. */
 (function (global) {
 'use strict';
@@ -718,7 +718,7 @@ function JPEGEncoder(quality) {
 global.JPEGStream = JPEGEncoder;
 })(this);
 
-/* EXIF-Block (Aufnahmedatum, Kamera „JZo M“, Look) – damit Fotos-App Datum & Infos richtig zeigt. */
+/* EXIF-Block (Aufnahmedatum, Kamera „M1993“, Look) – damit Fotos-App Datum & Infos richtig zeigt. */
 (function (global) {
   'use strict';
   function ascii(s) { s = String(s).replace(/[^\x20-\x7e]/g, '?'); var a = []; for (var i = 0; i < s.length; i++) a.push(s.charCodeAt(i)); a.push(0); return a; }
@@ -732,9 +732,9 @@ global.JPEGStream = JPEGEncoder;
     var ifd0 = [
       [0x010E, 2, ascii(o.desc || '')],          // ImageDescription
       [0x010F, 2, ascii(o.make || 'JZo Entertainment')],
-      [0x0110, 2, ascii(o.model || 'JZo M')],
+      [0x0110, 2, ascii(o.model || 'M1993')],
       [0x0112, 3, 1],                             // Orientation
-      [0x0131, 2, ascii(o.software || 'JZo M')],
+      [0x0131, 2, ascii(o.software || 'M1993')],
       [0x0132, 2, ascii(date)],
       [0x8769, 4, 0]                              // ExifIFD-Zeiger (wird unten gesetzt)
     ];

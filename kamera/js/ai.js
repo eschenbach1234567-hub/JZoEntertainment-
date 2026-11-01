@@ -1,4 +1,4 @@
-/* JZo M – KI-Auflösung („AI Resolution“): rechnet Fotos mit einem neuronalen Netz (ESRGAN/RDN,
+/* M1993 – KI-Auflösung („AI Resolution“): rechnet Fotos mit einem neuronalen Netz (ESRGAN/RDN,
    UpscalerJS-Modelle, MIT-Lizenz) auf 2× oder 4× hoch. Läuft komplett auf dem Gerät (TensorFlow.js + WebGL),
    kein Server, keine Kosten. Die Datei liegt im Ordner models/ und vendor/ und wird erst beim ersten Gebrauch geladen.
 

@@ -185,7 +185,7 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
     Uniform-Limit 64 – bei neuen Shader-Effekten Limit im Blick behalten).
     Design hell (Standard) oder dunkel wie Resolve (⚙️).
 
-16. **JZo M** (`kamera/`) – Jans Messsucher-Kamera-App im Stil Leica M10/M11
+16. **M1993** (früher „JZo M“, auf Jans Wunsch umbenannt; Ordner bleibt `kamera/`) – Jans Messsucher-Kamera-App im Stil Leica M10/M11
     (Jan ist großer Fan der Leica-Looks), Link:
     https://eschenbach1234567-hub.github.io/JZoEntertainment-/kamera/
     Eigenständige PWA wie Jam/Video (eigenes Manifest/Icon/SW, `noindex`, nicht

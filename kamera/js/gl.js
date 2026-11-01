@@ -1,4 +1,4 @@
-/* JZo M – Bildentwicklung per WebGL (Vorschau live + volle Auflösung, auch streifenweise für KI-Bilder).
+/* M1993 – Bildentwicklung per WebGL (Vorschau live + volle Auflösung, auch streifenweise für KI-Bilder).
    Ein Durchgang: Zuschnitt/Drehung → Schärfe → Weißabgleich/Belichtung → Lichter/Schatten →
    (Schwarzweiß) → Kontrastkurve → Farben/Tönung → Vignette → Korn → (Fokus-Peaking, nur Vorschau). */
 (function (global) {

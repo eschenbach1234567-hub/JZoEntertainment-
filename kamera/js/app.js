@@ -1,4 +1,4 @@
-/* JZo M – Oberfläche: Sucher, Wählräder, Auslösen, Fotos, Entwickeln, KI-Auflösung, Menü. */
+/* M1993 – Oberfläche: Sucher, Wählräder, Auslösen, Fotos, Entwickeln, KI-Auflösung, Menü. */
 (function () {
   'use strict';
   var L = window.Looks;
@@ -31,7 +31,7 @@
   function toast(t, ms) { var e = $('toast'); e.textContent = t; e.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { e.classList.remove('on'); }, ms || 2200); }
   function fileName(t, suffix) {
     var d = new Date(t); function p(n) { return (n < 10 ? '0' : '') + n; }
-    return 'JZoM_' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '_' + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds()) + (suffix || '') + '.jpg';
+    return 'M1993_' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '_' + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds()) + (suffix || '') + '.jpg';
   }
   function decode(blob) {
     if (window.createImageBitmap) return createImageBitmap(blob).catch(function () { return viaImg(blob); });
@@ -58,7 +58,7 @@
   }
   function exifFor(set, w, hh, extra) {
     var lk = L.byId(set.look);
-    return Exif.build({ desc: 'JZo M - Look ' + (lk ? lk.name : '') + (extra || ''), w: w, h: hh, date: new Date() });
+    return Exif.build({ desc: 'M1993 - Look ' + (lk ? lk.name : '') + (extra || ''), w: w, h: hh, date: new Date() });
   }
 
   // ---------- WebGL ----------

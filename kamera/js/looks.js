@@ -1,4 +1,4 @@
-/* JZo M – Bildstile ("Looks"), Weißabgleich, Wählräder.
+/* M1993 – Bildstile ("Looks"), Weißabgleich, Wählräder.
    Die Looks sind eigene Nachbauten im Stil klassischer Messsucher-Kameras – keine Original-Dateien
    eines Herstellers. Alle Werte sind Parameter für den Shader in gl.js.
 

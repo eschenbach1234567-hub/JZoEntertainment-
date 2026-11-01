@@ -1,4 +1,4 @@
-/* JZo M – Fotos auf dem Gerät speichern (IndexedDB „jzo-kamera“).
+/* M1993 – Fotos auf dem Gerät speichern (IndexedDB „jzo-kamera“).
    photos: { id, t, w, h, src:'kamera'|'import', set:{look,adj,wb,ev,iso,time,seed},
              orig: Blob (ohne Look), out: Blob (fertiges JPEG), thumb: Blob, big?: Blob, bigW, bigH } */
 (function (global) {
