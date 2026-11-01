@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>JZo M</title>
+<meta name="description" content="JZo M – Messsucher-Kamera mit klassischen Looks und KI-Auflösung. JZo Entertainment.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/icon-192.png" type="image/png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="JZo M">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="stylesheet" href="css/kamera.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <header class="top">
+    <button class="ic" id="menu-btn" type="button" aria-label="Menü">☰</button>
+    <div class="status" id="status"></div>
+    <button class="ic" id="style-btn" type="button" aria-label="Bildstil anpassen">◐</button>
+  </header>
+
+  <main class="finder-wrap" id="finder-wrap">
+    <div class="finder" id="finder">
+      <canvas id="view"></canvas>
+      <canvas id="overlay"></canvas>
+      <canvas id="histo" class="histo" width="128" height="48"></canvas>
+      <div class="evf" id="evf"></div>
+      <div class="countdown" id="countdown"></div>
+      <div class="flash" id="flash"></div>
+    </div>
+    <div class="start" id="start">
+      <div class="start-in">
+        <div class="cam-ill" aria-hidden="true"><span class="win"></span><span class="lens"></span><span class="win2"></span></div>
+        <h1>JZo <b>M</b></h1>
+        <p>Messsucher-Kamera · Looks · KI-Auflösung</p>
+        <button class="power" id="power-btn" type="button"><span class="pw-dot"></span> Einschalten</button>
+        <button class="link" id="start-gal" type="button">Nur Fotos ansehen / importieren</button>
+        <p class="small" id="start-msg">Beim Einschalten fragt das iPhone nach Kamera- und Bewegungssensor-Zugriff – bitte „Erlauben“ tippen.</p>
+      </div>
+    </div>
+  </main>
+
+  <section class="picker" id="picker" hidden></section>
+
+  <nav class="dials" id="dials" aria-label="Wählräder"></nav>
+
+  <footer class="controls">
+    <button class="thumb" id="gal-btn" type="button" aria-label="Fotos"><img id="gal-thumb" alt=""></button>
+    <button class="shutter" id="shutter" type="button" aria-label="Auslösen"><span></span></button>
+    <div class="lenses" id="lenses"></div>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<video id="video" playsinline muted autoplay></video>
+
+<script src="js/looks.js"></script>
+<script src="js/jpeg.js"></script>
+<script src="js/gl.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/app.js"></script>
+<script>
+if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+</script>
+</body>
+</html>

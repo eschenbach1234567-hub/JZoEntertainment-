@@ -185,6 +185,42 @@ und "es muss einfach funktionieren" sind ihm wichtiger als Tempo.
     Uniform-Limit 64 – bei neuen Shader-Effekten Limit im Blick behalten).
     Design hell (Standard) oder dunkel wie Resolve (⚙️).
 
+16. **JZo M** (`kamera/`) – Jans Messsucher-Kamera-App im Stil Leica M10/M11
+    (Jan ist großer Fan der Leica-Looks), Link:
+    https://eschenbach1234567-hub.github.io/JZoEntertainment-/kamera/
+    Eigenständige PWA wie Jam/Video (eigenes Manifest/Icon/SW, `noindex`, nicht
+    verlinkt), dunkles Kameragehäuse-Design. MARKE: Name „Leica“, roter Punkt und
+    Original-Look-Namen bewusst NICHT verwendet (Markenrecht) – Looks sind eigene
+    Nachbauten mit eigenen Namen (Standard, Lebendig, Natürlich, Chrom, Chrom
+    Kontrast, Klassik, Zeitgeist, Kino, S/W Natur, S/W Kontrast, Selen, Sepia,
+    Blau, Film 400) in `kamera/js/looks.js`. Mit Jan vorab geklärt (er war
+    einverstanden): nur JPEG (kein RAW/DNG), ~12 MP aus dem Kamerastream reichen,
+    Zeit/ISO nur simuliert (Safari erlaubt keine echte Belichtungssteuerung) –
+    Zeit A + ISO x = nur mehr Rauschen, beides manuell = Helligkeit relativ zu
+    ISO 200 · 1/125 s. Funktionen: Wählräder (Look/Zeit/ISO/EV/WB/Leuchtrahmen
+    28–135 mm/Format 3:2 usw.), Leuchtrahmen anzeigen ODER zuschneiden, Linsen-
+    wahl (0,5×/1×/Tele/Selfie über enumerateDevices-Labels; Brennweiten im Menü
+    einstellbar), Fokus-Peaking, Histogramm, Gitter, Wasserwaage + automatische
+    Hoch/Quer-Drehung (deviceorientation, iOS fragt beim „Einschalten“),
+    Selbstauslöser 2/12 s, Auslösegeräusch (WebAudio), L/M/S-Auflösung.
+    Fotos SOFORT in IndexedDB (`jzo-kamera`) – je Foto Original OHNE Look +
+    fertiges JPEG (mit EXIF-Datum) → „Entwickeln“ = Look nachträglich ändern,
+    Drehen, Vorher (gedrückt halten). Import aus Fotos-App (HEIC in Safari).
+    Teilen/Sichern einzeln oder mehrere (Share-Sheet → „Bild sichern“).
+    **KI-Auflösung** (Jans Wunsch „AI Resolution“): ESRGAN/RDN-Modelle von
+    UpscalerJS (MIT, `kamera/models/`, slim x2/x4 + medium x2) mit TensorFlow.js
+    4.22 (`kamera/vendor/tf.min.js`), beides SELBST gehostet (CDNs waren hier
+    gesperrt, und so geht's offline) – läuft auf dem Gerät per WebGL, kein
+    Server. Weil iPhone-Canvas max ~16,7 MP: Original → KI in Kacheln (128 px +
+    14 px Rand) → Streifen mit Look per WebGL entwickeln → eigener streamender
+    JPEG-Encoder (`js/jpeg.js`, aus jpeg-js/Adobe-BSD angepasst, 4:2:0) → so
+    gehen bis 64 MP (Obergrenze im Menü, Standard 48). Ergebnis als `big` am
+    Foto. Getestet nur in Chromium mit Software-WebGL + Fake-Kamera; auf echtem
+    iPhone noch nicht (Tempo dort unbekannt, geschätzt 1–10 Min.).
+    Code: `looks.js`, `gl.js` (Shader, ein Durchgang), `jpeg.js` (+EXIF),
+    `ai.js`, `store.js`, `app.js`. Bei Änderungen `CACHE` in `kamera/sw.js`
+    hochzählen (KI-Dateien haben eigenen Cache `AI_CACHE`).
+
 ## Wichtige Eigenheiten / nicht "reparieren"
 
 - **E-Mail-Adresse `jzoentertainmet@outlook.com`** – der Tippfehler
