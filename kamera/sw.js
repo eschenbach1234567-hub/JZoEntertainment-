@@ -2,7 +2,7 @@
    App-Dateien: erst Netz (neueste Version), ohne Netz die gespeicherte Kopie.
    KI-Dateien (vendor/, models/): einmal laden, dann aus dem Speicher (groß, ändern sich nicht).
    Bei Änderungen an App-Dateien CACHE hochzählen. */
-var CACHE = 'jzo-kamera-v2';
+var CACHE = 'jzo-kamera-v3';
 var AI_CACHE = 'jzo-kamera-ki-v1';
 var FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/kamera.css',

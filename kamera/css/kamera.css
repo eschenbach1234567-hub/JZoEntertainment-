@@ -48,6 +48,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* Startbildschirm („Einschalten“) */
 .start { position: absolute; inset: 0; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 30%, #1d1d1d, #070707 70%); z-index: 5; text-align: center; padding: 20px; }
+.start .brand-top { margin-top: 18px; font-size: 12px; letter-spacing: .18em; color: var(--silver); }
+.start .brand-top + h1 { margin-top: 6px; }
 .start h1 { font: 300 44px/1 -apple-system, "Helvetica Neue", sans-serif; letter-spacing: .04em; margin: 18px 0 6px; }
 .start h1 b { font-weight: 700; color: var(--acc); }
 .start p { color: var(--muted); margin: 0 0 22px; }
